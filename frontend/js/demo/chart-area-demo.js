@@ -36,14 +36,14 @@ var myLineChart = new Chart(ctx, {
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
+      backgroundColor: "rgba(231,  74,  59, 0.05)",
+      borderColor: "rgba(231,  74,  59, 1)",
       pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
+      pointBackgroundColor: "rgba(231, 74,  59, 1)",
+      pointBorderColor: "rgba(231,  74,  59, 1)",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+      pointHoverBackgroundColor: "rgba(231,  74,  59, 1)",
+      pointHoverBorderColor: "rgba(231,  74,  59, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
       data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
@@ -78,7 +78,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'Php' + number_format(value);
           }
         },
         gridLines: {

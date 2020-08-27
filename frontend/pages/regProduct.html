@@ -21,6 +21,16 @@
   <!-- Custom styles for this page -->
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <style type="text/css">
+    
+    img{
+      float: center;
+      margin:auto;
+      height: 300px !important;
+      width: 100%;
+    }
+
+  </style>
 </head>
 
 <body id="page-top">
@@ -199,58 +209,60 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Summary Report</h1>
+          <h1 class="h3 mb-2 text-gray-800">Product Registration</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-danger">Costumers</h6>
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Date Registered</th>
-                      <th>Firstname</th>
-                      <th>Lastname</th>
-                      <th>Date of Birth</th>
-                      <th>Address City</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Date Registered</th>
-                      <th>Firstname</th>
-                      <th>Lastname</th>
-                      <th>Date of Birth</th>
-                      <th>Address City</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <tr>
-                      <td>2011/04/25</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-                      <td>2011/04/25</td>
-                      <td>Edinburgh</td>
-                    </tr>
-                    <tr>
-                      <td>2011/07/25</td>
-                      <td>Garrett</td>
-                      <td>Winters</td>
-                      <td>2011/07/25</td>
-                      <td>Tokyo</td>
-                    </tr>
-                    <tr>
-                      <td>2009/01/12</td>
-                      <td>Ashton</td>
-                      <td>Cox</td>
-                      <td>2009/01/12</td>
-                      <td>San Francisco</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="col-lg-12">
+                <div class="p-3">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-5">Product Information</h1>
+                  </div>
+                  <form class="user">
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="productName" placeholder="Name">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="productCategory" placeholder="Category">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="productBrand" placeholder="Brand">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="productColor" placeholder="Color">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="productDimension" placeholder="Dimension">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="productPrice" placeholder="Price">
+                      </div>
+                      <div class="col-sm-4 mb-4">
+                        <input type="text" class="form-control form-control-user" id="productStocks" placeholder="No. of Stocks">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
+                        <img class="rounded" src="../images/product1.jpg">
+                      </div>
+                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
+                        <img class="rounded" src="../images/product2.jpg">
+                      </div>
+                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
+                        <img class="rounded" src="../images/product3.jpg">
+                      </div>
+                    </div>
+                    <a href="login.html" class="btn btn-danger btn-user btn-block">
+                      Register Product
+                    </a>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

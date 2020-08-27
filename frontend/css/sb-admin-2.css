@@ -166,13 +166,13 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #e74a3b;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #e82715;
   text-decoration: underline;
 }
 
@@ -3234,7 +3234,7 @@ input[type="button"].btn-block {
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #4e73df;
+  background-color: #e74a3b;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
@@ -4758,7 +4758,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;
+  color: #e74a3b;
   background-color: #fff;
   border: 1px solid #dddfeb;
 }
@@ -4791,8 +4791,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #e74a3b;
+  border-color: #e74a3b;
 }
 
 .page-item.disabled .page-link {
@@ -6140,7 +6140,7 @@ a.close.disabled {
 .carousel-item {
   position: relative;
   display: none;
-  float: left;
+  float: center;
   width: 100%;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
