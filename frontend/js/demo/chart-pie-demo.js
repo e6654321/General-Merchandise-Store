@@ -7,7 +7,7 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["Wholesale", "Resell", "Ads"],
     datasets: [{
       data: [55, 30, 15],
       backgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc'],

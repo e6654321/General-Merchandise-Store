@@ -21,6 +21,154 @@
   <!-- Custom styles for this page -->
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <style type="text/css">
+    
+    .steps {
+      width: 100%;
+      box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.3);
+      background-color: #FFF;
+      padding: 24px 0;
+      position: relative;
+      margin: auto;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 24px;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.2);
+      left: calc(50px / 2);
+      z-index: 1;
+    }
+
+    .steps::after {
+      content: '';
+      position: absolute;
+      height: 13px;
+      width: 13px;
+      background-color: var(--primary-color);
+      box-shadow: 0px 0px 5px 0px var(--primary-color);
+      border-radius: 15px;
+      left: calc(50px / 2);
+      bottom: 24px;
+      transform: translateX(-45%);
+      z-index: 2;
+    }
+
+    .step {
+      padding: 0 20px 24px 50px;
+      position: relative;
+      transition: all 0.4s ease-in-out;
+      background-color: #FFF;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      height: 13px;
+      width: 13px;
+      background-color: rgb(198, 198, 198);
+      border-radius: 15px;
+      left: calc(50px / 2);
+      transform: translateX(-45%);
+      z-index: 2;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      background-color: rgb(198, 198, 198);
+      left: calc(50px / 2);
+      top: 0;
+      z-index: 1;
+    }
+
+    .step.minimized {
+      background-color: #FFF;
+      transition: background-color 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .header {
+      user-select: none;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .subheader {
+      user-select: none;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .step-content {
+      transition: all 0.5s ease-in-out;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .step.minimized > .step-content {
+      height: 0px;
+    }
+
+    .step-content.one {
+      height: auto;
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .step-content.two {
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .step-content.three {
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .next-btn {
+      border: 0;
+      padding: 10px 20px;
+      border-radius: 4px;
+      box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+      color: #FFF;
+      transition: background-color 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      border: 0;
+      padding: 10px 20px;
+      border-radius: 4px;
+      box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+      color: #FFF;
+      transition: background-color 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    /* Irrelevant styling things */
+    /*.close-btn:hover {
+      background-color: rgba(255, 0, 255, 0.6);
+    }
+
+    .close-btn:focus {
+      outline: 0;
+    }
+*/
+    .next-btn:focus {
+      outline: 0;
+    }
+
+    .step.minimized:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  </style>
 </head>
 
 <body id="page-top">
@@ -34,7 +182,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-dollar-sign"></i>
+          <i class="fas fa-shopping-bag"></i>
         </div>
         <div class="sidebar-brand-text mx-3">GenMerch</div>
       </a>
@@ -58,7 +206,7 @@
       </div>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <i class="fas fa-fw fa-table"></i>
           <span>Tabular Reports</span>
@@ -80,7 +228,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
           <span>Register</span>
@@ -166,7 +314,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin User</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img class="img-profile rounded-circle" src="../images/product1.jpg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,10 +356,12 @@
             <div class="card-body">
               <div class="col-lg-12">
                 <div class="p-3">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-5">Personal Information</h1>
-                  </div>
-                  <form class="user">
+                  <form class="user"><div class="steps">
+                    <div class="step">
+                      <div class="step-header">
+                        <div class="header">Personal Information</div>
+                      </div>
+                      <div class="step-content one">
                     <div class="col-sm-4 mb-3 mb-sm-0 float-right">
                       <img src="../images/costumer.jpg" class="card-img-top rounded" alt="...">
                     </div>
@@ -270,10 +420,20 @@
                       <div class="col-sm-4">
                         <input type="text" class="form-control form-control-user" id="height" placeholder="Height">
                       </div>
-                      <div class="col-sm-4 mb-5">
+                      <div class="col-sm-4">
                         <input type="text" class="form-control form-control-user" id="weight" placeholder="Weight">
                       </div>
                     </div>
+                    <a href="#" class="btn btn-danger btn-user btn-block next-btn">
+                      Next
+                    </a>
+                      </div>
+                    </div>
+                    <div class="step minimized">
+                      <div class="step-header">
+                        <div class="header">Family</div>
+                      </div>
+                      <div class="step-content two">
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Spouse</h1>
                     </div>
@@ -327,9 +487,19 @@
                         <input type="text" class="form-control form-control-user" id="fatherLastName" placeholder="Last Name">
                       </div>
                     </div>
-                    <div class="form-group mb-5">
+                    <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="fatherOccupation" placeholder="Occupation">
                     </div>
+                    <a href="#" class="btn btn-danger btn-user btn-block next-btn">
+                      Next
+                    </a>
+                      </div>
+                    </div>
+                    <div class="step minimized">
+                      <div class="step-header">
+                        <div class="header">Education and Trainings</div>
+                      </div>
+                      <div class="step-content three">
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Elementary</h1>
                     </div>
@@ -437,13 +607,16 @@
                       <div class="col-sm-4">
                         <input type="text" class="form-control form-control-user" id="trainingDate" placeholder="Date">
                       </div>
-                      <div class="col-sm-4 mb-5">
+                      <div class="col-sm-4">
                         <input type="text" class="form-control form-control-user" id="trainingVenue" placeholder="Venue">
                       </div>
                     </div>
-                    <a href="#" class="btn btn-danger btn-user btn-block">
+                    <a href="#" class="btn btn-danger btn-user btn-block close-btn">
                       Register Costumer
                     </a>
+                      </div>
+                    </div>
+                  </div>
                   </form>
                 </div>
               </div>
@@ -506,12 +679,8 @@
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="../js/demo/datatables-demo.js"></script>
+  <!-- Custom scripts stepper-->
+  <script src="../js/demo/stepper.js"></script>
 
 </body>
 
