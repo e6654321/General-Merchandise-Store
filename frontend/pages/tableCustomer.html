@@ -13,6 +13,7 @@
   {% load static %}
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="{% static '/assets/shopping-bag.svg' %}" />
+
   <!-- Custom fonts for this template -->
   <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -21,18 +22,8 @@
   <link href="{% static '/css/sb-admin-2.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
 
-  <style type="text/css">
-    
-    .form-group img{
-      float: center;
-      margin:auto;
-      height: 300px !important;
-      width: 100%;
-    }
-
-  </style>
 </head>
 
 <body id="page-top">
@@ -70,7 +61,7 @@
       </div>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <i class="fas fa-fw fa-table"></i>
           <span>Tabular Reports</span>
@@ -92,7 +83,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
           <span>Register</span>
@@ -204,60 +195,84 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Product Registration</h1>
+          <h1 class="h3 mb-2 text-gray-800">Summary Report</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-danger">Costumers</h6>
             </div>
             <div class="card-body">
-              <div class="col-lg-12">
-                <div class="p-3">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-5">Product Information</h1>
-                  </div>
-                  <form class="user">
-                    <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="productName" placeholder="Name">
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productCategory" placeholder="Category">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productBrand" placeholder="Brand">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productColor" placeholder="Color">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productDimension" placeholder="Dimension">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productPrice" placeholder="Price">
-                      </div>
-                      <div class="col-sm-4 mb-4">
-                        <input type="text" class="form-control form-control-user" id="productStocks" placeholder="No. of Stocks">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product1.jpg' %}">
-                      </div>
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product2.jpg' %}">
-                      </div>
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product3.jpg' %}">
-                      </div>
-                    </div>
-                    <a href="#" class="btn btn-danger btn-user btn-block">
-                      Register Product
-                    </a>
-                  </form>
-                </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Date Registered</th>
+                      <th>Firstname</th>
+                      <th>Lastname</th>
+                      <th>Date of Birth</th>
+                      <th>Address City</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th></th>
+                      <th>Date Registered</th>
+                      <th>Firstname</th>
+                      <th>Lastname</th>
+                      <th>Date of Birth</th>
+                      <th>Address City</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr>
+                      <td >
+                        <a data-toggle="modal" data-target="#deleteModal">
+                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#updateModal">
+                          <i class="fas fa-edit fa-sm"></i>
+                        </a>
+                      </td>
+                      <td>2011/04/25</td>
+                      <td>Tiger</td>
+                      <td>Nixon</td>
+                      <td>2011/04/25</td>
+                      <td>Edinburgh</td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <a data-toggle="modal" data-target="#deleteModal">
+                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#updateModal">
+                          <i class="fas fa-edit fa-sm"></i>
+                        </a>
+                      </td>
+                      <td>2011/07/25</td>
+                      <td>Garrett</td>
+                      <td>Winters</td>
+                      <td>2011/07/25</td>
+                      <td>Tokyo</td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <a data-toggle="modal" data-target="#deleteModal">
+                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#updateModal">
+                          <i class="fas fa-edit fa-sm"></i>
+                        </a>
+                      </td>
+                      <td>2009/01/12</td>
+                      <td>Ashton</td>
+                      <td>Cox</td>
+                      <td>2009/01/12</td>
+                      <td>San Francisco</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -288,6 +303,66 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+
+  <!-- Update Modal-->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger" id="updateModalLabel">View Row</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+              <input type="text" class="form-control form-control-user" id="firstName" placeholder="First Name">
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control form-control-user" id="lastName" placeholder="Last Name">
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control form-control-user" id="addressCity" placeholder="City">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 mb-4 mb-sm-0">
+              <label class="control-label" for="date">Date Registered</label>
+              <input class="form-control form-control-user" id="regdate" name="date" placeholder="MM/DD/YYY" type="text"/>
+            </div>
+            <div class="col-sm-6">
+              <label class="control-label" for="date">Date of Birth</label>
+              <input class="form-control form-control-user" id="birthdate" name="date" placeholder="MM/DD/YYY" type="text"/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+          <a class="btn btn-danger" data-dismiss="modal" href="#">Update</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModal">Are you sure?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">You can no longer recover this row after deletion.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger" data-dismiss="modal" href="#">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -325,6 +400,22 @@
   <!-- Page level custom scripts -->
   <script src="{% static '/js/demo/datatables-demo.js' %}"></script>
 
+  <!-- Include Date Range Picker -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+  <script>
+      $(document).ready(function(){
+          var date_input=$('input[name="date"]'); //our date input has the name "date"
+          var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+          date_input.datepicker({
+              format: 'mm/dd/yyyy',
+              container: container,
+              todayHighlight: true,
+              autoclose: true,
+          })
+      })
+  </script>
 </body>
 
 </html>

@@ -10,16 +10,19 @@
   <meta name="author" content="">
 
   <title>GenMerch Dashboard</title>
+  {% load static %}
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="{% static '/assets/shopping-bag.svg' %}" />
 
   <!-- Custom fonts for this template -->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../css/sb-admin-2.css" rel="stylesheet">
+  <link href="{% static '/css/sb-admin-2.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
 </head>
 
@@ -44,7 +47,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="dashboard.html">
+        <a class="nav-link" href="{% url 'dashboard' %}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -65,8 +68,8 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="tableCostumer.html">Customers</a>
-            <a class="collapse-item" href="tableProduct.html">Products</a>
+            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -87,18 +90,13 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="regCostumer.html">Customers</a>
-            <a class="collapse-item" href="regProduct.html">Products</a>
+            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - About -->
-      <li class="nav-item">
-        <a class="nav-link" href="about.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>About</span></a>
-      </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -118,7 +116,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-secondary topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
           <form class="form-inline">
@@ -165,26 +163,26 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-dark small">Admin User</span>
-                <img class="img-profile rounded-circle" src="../images/product1.jpg">
+                <span class="mr-2 d-none d-lg-inline text-light small">Admin User</span>
+                <img class="img-profile rounded-circle" src="{% static '/assets/img/product1.jpg' %}">
               </a>
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              <div class="dropdown-menu dropdown-menu-right bg-secondary shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2"></i>
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-light" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
                   Logout
                 </a>
               </div>
@@ -201,7 +199,10 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <div class="row">
+              <a href="{% url 'regcustomer' %}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-3"><i class="fas fa-plus fa-sm text-white-50"></i> Add Customer</a>
+              <a href="{% url 'regproduct' %}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-3"><i class="fas fa-plus fa-sm text-white-50"></i> Add Product</a>
+            </div>
           </div>
 
           <!-- Content Row -->
@@ -288,11 +289,12 @@
               </div>
             </div>
           </div>
+      </div>
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer copyright">
         <div class="container my-auto">
-          <div class="copyright text-center my-auto">
+          <div class="copyright text-center my-auto text-light">
             <span>Copyright &copy; GenMerch 2020</span>
           </div>
         </div>
@@ -301,7 +303,6 @@
 
         <!-- /.container-fluid -->
 
-      </div>
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
@@ -322,28 +323,28 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{% static '/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../js/sb-admin-2.min.js"></script>
+  <script src="{% static '/js/sb-admin-2.min.js' %}"></script>
 
   <!-- Page level plugins -->
-  <script src="../vendor/chart.js/Chart.min.js"></script>
+  <script src="{% static '/vendor/chart.js/Chart.min.js' %}"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../js/demo/chart-area-demo.js"></script>
-  <script src="../js/demo/chart-pie-demo.js"></script>
+  <script src="{% static '/js/demo/chart-area-demo.js' %}"></script>
+  <script src="{% static '/js/demo/chart-pie-demo.js' %}"></script>
 
 </body>
 

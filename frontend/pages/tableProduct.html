@@ -10,16 +10,19 @@
   <meta name="author" content="">
 
   <title>GenMerch Dashboard</title>
+  {% load static %}
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="{% static '/assets/shopping-bag.svg' %}" />
 
   <!-- Custom fonts for this template -->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../css/sb-admin-2.css" rel="stylesheet">
+  <link href="{% static '/css/sb-admin-2.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
 </head>
 
@@ -32,7 +35,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-shopping-bag"></i>
         </div>
@@ -44,7 +47,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.html">
+        <a class="nav-link" href="{% url 'dashboard' %}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -65,8 +68,8 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="tableCostumer.html">Customers</a>
-            <a class="collapse-item" href="tableProduct.html">Products</a>
+            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -87,17 +90,10 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="regCostumer.html">Customers</a>
-            <a class="collapse-item" href="regProduct.html">Products</a>
+            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
           </div>
         </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="about.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>About</span></a>
       </li>
 
       <!-- Divider -->
@@ -118,7 +114,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-secondary topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
           <form class="form-inline">
@@ -130,7 +126,7 @@
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-white border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-danger" type="button">
                   <i class="fas fa-search fa-sm"></i>
@@ -151,9 +147,9 @@
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-dark border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-danger" type="button">
+                      <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
                       </button>
                     </div>
@@ -165,26 +161,26 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin User</span>
-                <img class="img-profile rounded-circle" src="../images/product1.jpg">
+                <span class="mr-2 d-none d-lg-inline text-light small">Admin User</span>
+                <img class="img-profile rounded-circle" src="{% static '/assets/img/product1.jpg' %}">
               </a>
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              <div class="dropdown-menu dropdown-menu-right bg-secondary shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2"></i>
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-light" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
                   Logout
                 </a>
               </div>
@@ -211,6 +207,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>Date Registered</th>
                       <th>Category</th>
                       <th>Brand</th>
@@ -221,6 +218,7 @@
                   </thead>
                   <tfoot>
                     <tr>
+                      <th></th>
                       <th>Date Registered</th>
                       <th>Category</th>
                       <th>Brand</th>
@@ -231,6 +229,14 @@
                   </tfoot>
                   <tbody>
                     <tr>
+                      <td >
+                        <a data-toggle="modal" data-target="#deleteModal">
+                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#updateModal">
+                          <i class="fas fa-edit fa-sm"></i>
+                        </a>
+                      </td>
                       <td>2011/04/25</td>
                       <td>School Supplies</td>
                       <td>Monggol</td>
@@ -239,6 +245,14 @@
                       <td>48</td>
                     </tr>
                     <tr>
+                      <td >
+                        <a data-toggle="modal" data-target="#deleteModal">
+                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#updateModal">
+                          <i class="fas fa-edit fa-sm"></i>
+                        </a>
+                      </td>
                       <td>2011/07/25</td>
                       <td>Appliances</td>
                       <td>Mitsubishi</td>
@@ -247,6 +261,14 @@
                       <td>18</td>
                     </tr>
                     <tr>
+                      <td >
+                        <a data-toggle="modal" data-target="#deleteModal">
+                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#updateModal">
+                          <i class="fas fa-edit fa-sm"></i>
+                        </a>
+                      </td>
                       <td>2009/01/12</td>
                       <td>Food Stuffs</td>
                       <td>Magnolia</td>
@@ -267,9 +289,9 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer copyright">
         <div class="container my-auto">
-          <div class="copyright text-center my-auto">
+          <div class="copyright text-center my-auto text-light">
             <span>Copyright &copy; GenMerch 2020</span>
           </div>
         </div>
@@ -287,6 +309,70 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+  <!-- Update Modal-->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger" id="updateModalLabel">View Row</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-4 mb-4 mb-sm-0">
+              <label class="control-label" for="regdate">Date Registered</label>
+              <input class="form-control form-control-user" id="regdate" name="date" placeholder="MM/DD/YYY" type="text"/>
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label" for="category"></label>
+              <input type="text" class="form-control form-control-user" id="category" placeholder="Category">
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label" for="brand"></label>
+              <input type="text" class="form-control form-control-user" id="brand" placeholder="Brand">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+              <input type="text" class="form-control form-control-user" id="name" placeholder="Name">
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control form-control-user" id="price" placeholder="Price">
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control form-control-user" id="number" placeholder="No. of Items">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+          <a class="btn btn-danger" data-dismiss="modal" href="#">Update</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModal">Are you sure?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">You can no longer recover this row after deletion.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger" data-dismiss="modal" href="#">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -300,29 +386,45 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="login.html">Logout</a>
+          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{% static '/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../js/sb-admin-2.min.js"></script>
+  <script src="{% static '/js/sb-admin-2.min.js' %}"></script>
 
   <!-- Page level plugins -->
-  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="{% static '/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static '/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../js/demo/datatables-demo.js"></script>
+  <script src="{% static '/js/demo/datatables-demo.js' %}"></script>
 
+<!-- Include Date Range Picker -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+  <script>
+      $(document).ready(function(){
+          var date_input=$('input[name="date"]'); //our date input has the name "date"
+          var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+          date_input.datepicker({
+              format: 'mm/dd/yyyy',
+              container: container,
+              todayHighlight: true,
+              autoclose: true,
+          })
+      })
+  </script>
 </body>
 
 </html>
