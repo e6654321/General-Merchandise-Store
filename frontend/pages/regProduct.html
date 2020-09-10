@@ -16,12 +16,16 @@
   <!-- Custom fonts for this template -->
   <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="{% static '/css/sb-admin-2.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this page -->
   <link href="{% static '/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for upload image -->
+  <link href="{% static '/css/upload-style.css' %}" rel="stylesheet">
 
   <style type="text/css">
     
@@ -243,14 +247,32 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product1.jpg' %}">
+                      <div class="box col-sm-3 mb-3 mb-sm-0 mx-auto px-0"><!-- 
+                        <img class="rounded" src="{% static '/assets/img/product1.jpg' %}"> -->
+                        <div class="js--image-preview"></div>
+                        <div class="upload-options">
+                          <label>
+                            <input type="file" class="image-upload" accept="image/*" />
+                          </label>
+                        </div>
                       </div>
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product2.jpg' %}">
+                      <div class="box px-0 col-sm-3 mb-3 mb-sm-0 mx-auto"><!-- 
+                        <img class="rounded" src="{% static '/assets/img/product2.jpg' %}"> -->
+                        <div class="js--image-preview"></div>
+                        <div class="upload-options">
+                          <label>
+                            <input type="file" class="image-upload" accept="image/*" />
+                          </label>
+                        </div>
                       </div>
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product3.jpg' %}">
+                      <div class="box px-0 col-sm-3 mb-3 mb-sm-0 mx-auto"><!-- 
+                        <img class="rounded" src="{% static '/assets/img/product3.jpg' %}"> -->
+                        <div class="js--image-preview"></div>
+                        <div class="upload-options">
+                          <label>
+                            <input type="file" class="image-upload" accept="image/*" />
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <a href="#" class="btn btn-danger btn-user btn-block">
@@ -324,6 +346,9 @@
 
   <!-- Page level custom scripts -->
   <script src="{% static '/js/demo/datatables-demo.js' %}"></script>
+
+  <!-- Custom scripts upload image-->
+  <script src="{% static '/js/upload-script.js' %}"></script>
 
 </body>
 
