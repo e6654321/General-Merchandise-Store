@@ -10,29 +10,19 @@
   <meta name="author" content="">
 
   <title>GenMerch Dashboard</title>
-  {% load static %}
   <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="{% static '/assets/shopping-bag.svg' %}" />
+  <link rel="icon" type="image/x-icon" href="../assets/shopping-bag.svg" />
+
   <!-- Custom fonts for this template -->
-  <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="{% static '/css/sb-admin-2.css' %}" rel="stylesheet">
+  <link href="../css/sb-admin-2.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-  <style type="text/css">
-    
-    .form-group img{
-      float: center;
-      margin:auto;
-      height: 300px !important;
-      width: 100%;
-    }
-
-  </style>
 </head>
 
 <body id="page-top">
@@ -44,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-shopping-bag"></i>
         </div>
@@ -56,7 +46,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard' %}">
+        <a class="nav-link" href="dashboard.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -77,8 +67,8 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
+            <a class="collapse-item" href="tableCostumer.html">Customers</a>
+            <a class="collapse-item" href="tableProduct.html">Products</a>
           </div>
         </div>
       </li>
@@ -92,17 +82,27 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
           <span>Register</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
+            <a class="collapse-item" href="regCostumer.html">Customers</a>
+            <a class="collapse-item" href="regProduct.html">Products</a>
           </div>
         </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+      
+      <!-- Nav Item - Charts -->
+      <li class="nav-item active">
+        <a class="nav-link" href="about.html">
+          <i class="fas fa-fw fa-info"></i>
+          <span>About</span></a>
       </li>
 
       <!-- Divider -->
@@ -171,7 +171,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-light small">Admin User</span>
-                <img class="img-profile rounded-circle" src="{% static '/assets/img/product1.jpg' %}">
+                <img class="img-profile rounded-circle" src="../assets/img/product1.jpg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right bg-secondary shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -203,63 +203,12 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Product Registration</h1>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-            </div>
-            <div class="card-body">
-              <div class="col-lg-12">
-                <div class="p-3">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-5">Product Information</h1>
-                  </div>
-                  <form class="user">
-                    <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="productName" placeholder="Name">
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productCategory" placeholder="Category">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productBrand" placeholder="Brand">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productColor" placeholder="Color">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productDimension" placeholder="Dimension">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productPrice" placeholder="Price">
-                      </div>
-                      <div class="col-sm-4 mb-4">
-                        <input type="text" class="form-control form-control-user" id="productStocks" placeholder="No. of Stocks">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product1.jpg' %}">
-                      </div>
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product2.jpg' %}">
-                      </div>
-                      <div class="col-sm-4 mb-3 mb-sm-0 mx-auto">
-                        <img class="rounded" src="{% static '/assets/img/product3.jpg' %}">
-                      </div>
-                    </div>
-                    <a href="#" class="btn btn-danger btn-user btn-block">
-                      Register Product
-                    </a>
-                  </form>
-                </div>
-              </div>
-            </div>
+          <!-- 404 Error Text -->
+          <div class="text-center">
+            <div class="error mx-auto" data-text="404">404</div>
+            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+            <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+            <a href="../index.html">&larr; Back to Dashboard</a>
           </div>
 
         </div>
@@ -302,28 +251,28 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
+          <a class="btn btn-danger" href="login.html">Logout</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="{% static '/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="{% static '/js/sb-admin-2.min.js' %}"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="{% static '/vendor/datatables/jquery.dataTables.min.js' %}"></script>
-  <script src="{% static '/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="{% static '/js/demo/datatables-demo.js' %}"></script>
+  <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
 

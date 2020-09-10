@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GenMerch Dashboard</title>
+  {% load static %}
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="{% static '/assets/shopping-bag.svg' %}" />
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static '/css/sb-admin-2.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+  <style type="text/css">
+    
+    .steps {
+      width: 100%;
+      box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.3);
+      background-color: #FFF;
+      padding: 24px 0;
+      position: relative;
+      margin: auto;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 24px;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.2);
+      left: calc(50px / 2);
+      z-index: 1;
+    }
+
+    .steps::after {
+      content: '';
+      position: absolute;
+      height: 13px;
+      width: 13px;
+      background-color: var(--primary-color);
+      box-shadow: 0px 0px 5px 0px var(--primary-color);
+      border-radius: 15px;
+      left: calc(50px / 2);
+      bottom: 24px;
+      transform: translateX(-45%);
+      z-index: 2;
+    }
+
+    .step {
+      padding: 0 20px 24px 50px;
+      position: relative;
+      transition: all 0.4s ease-in-out;
+      background-color: #FFF;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      height: 13px;
+      width: 13px;
+      background-color: rgb(198, 198, 198);
+      border-radius: 15px;
+      left: calc(50px / 2);
+      transform: translateX(-45%);
+      z-index: 2;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      background-color: rgb(198, 198, 198);
+      left: calc(50px / 2);
+      top: 0;
+      z-index: 1;
+    }
+
+    .step.minimized {
+      background-color: #FFF;
+      transition: background-color 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .header {
+      user-select: none;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .subheader {
+      user-select: none;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .step-content {
+      transition: all 0.5s ease-in-out;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .step.minimized > .step-content {
+      height: 0px;
+    }
+
+    .step-content.one {
+      height: auto;
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .step-content.two {
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .step-content.three {
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .next-btn {
+      border: 0;
+      padding: 10px 20px;
+      border-radius: 4px;
+      box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+      color: #FFF;
+      transition: background-color 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      border: 0;
+      padding: 10px 20px;
+      border-radius: 4px;
+      box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+      color: #FFF;
+      transition: background-color 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    /* Irrelevant styling things */
+    /*.close-btn:hover {
+      background-color: rgba(255, 0, 255, 0.6);
+    }
+
+    .close-btn:focus {
+      outline: 0;
+    }
+*/
+    .next-btn:focus {
+      outline: 0;
+    }
+
+    .step.minimized:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  </style>
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-shopping-bag"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">GenMerch</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard' %}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Summary Reports
+      </div>
+
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tabular Reports</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Registration
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Register</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-secondary topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <form class="form-inline">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+              <i class="fa fa-bars"></i>
+            </button>
+          </form>
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-white border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-danger" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-dark border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-light small">Admin User</span>
+                <img class="img-profile rounded-circle" src="{% static '/assets/img/product1.jpg' %}">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right bg-secondary shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item text-light" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-light" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Costumer Registration</h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+            </div>
+            <div class="card-body">
+              <div class="col-lg-12">
+                <div class="p-3">
+                  <form class="user"><div class="steps">
+                    <div class="step">
+                      <div class="step-header">
+                        <div class="header">Personal Information</div>
+                      </div>
+                      <div class="step-content one">
+                    <div class="col-sm-4 mb-3 mb-sm-0 float-right">
+                      <img src="{% static '/assets/img/costumer.jpg' %}" class="card-img-top rounded" alt="...">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="exampleMiddleName" placeholder="Middle Name">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="exampleStreet" placeholder="Street Address">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleBarangay" placeholder="Barangay">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="exampleCity" placeholder="City">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleProvince" placeholder="Province">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="exampleMZip" placeholder="Zip">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleCountry" placeholder="Country">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="religion" placeholder="Religion">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleGender" placeholder="Gender">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="exampleBirthdate" placeholder="Birthdate">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="exampleStatus" placeholder="Status">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="height" placeholder="Height">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="weight" placeholder="Weight">
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-danger btn-user btn-block next-btn">
+                      Next
+                    </a>
+                      </div>
+                    </div>
+                    <div class="step minimized">
+                      <div class="step-header">
+                        <div class="header">Family</div>
+                      </div>
+                      <div class="step-content two">
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Spouse</h1>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="spouseFirstName" placeholder="First Name">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="spouseMiddleName" placeholder="Middle Name">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="spouseLastName" placeholder="Last Name">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-9 mb-3 mb-sm-0">
+                        <input type="email" class="form-control form-control-user" id="spouseOccupation" placeholder="Occupation">
+                      </div>
+                      <div class="col-sm-3 mb-5">
+                        <input type="email" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children">
+                      </div>
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Mother</h1>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="motherFirstName" placeholder="First Name">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="motherMiddleName" placeholder="Middle Name">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="motherLastName" placeholder="Last Name">
+                      </div>
+                    </div>
+                    <div class="form-group mb-5">
+                      <input type="text" class="form-control form-control-user" id="motherOccupation" placeholder="Occupation">
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Father</h1>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="fatherFirstName" placeholder="First Name">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="fatherMiddleName" placeholder="Middle Name">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="fatherLastName" placeholder="Last Name">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="fatherOccupation" placeholder="Occupation">
+                    </div>
+                    <a href="#" class="btn btn-danger btn-user btn-block next-btn">
+                      Next
+                    </a>
+                      </div>
+                    </div>
+                    <div class="step minimized">
+                      <div class="step-header">
+                        <div class="header">Education and Trainings</div>
+                      </div>
+                      <div class="step-content three">
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Elementary</h1>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="elementarySchool" placeholder="School">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="elementaryGrade" placeholder="Grade">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="elementaryYearCompleted" placeholder="Year Completed">
+                      </div>
+                    </div>
+                    <div class="form-group mb-5">
+                      <textarea type="text" class="form-control" id="elementaryAwards" placeholder="Awards"></textarea>
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Junior High School</h1>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="jhsSchool" placeholder="School">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="jhsGrade" placeholder="Grade">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed">
+                      </div>
+                    </div>
+                    <div class="form-group mb-5">
+                      <textarea type="text" class="form-control" id="jhsAwards" placeholder="Awards"></textarea>
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Senior High School</h1>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="shsSchool" placeholder="School">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="shsStrand" placeholder="Strand">
+                      </div>
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="shsGrade" placeholder="Grade">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="shsYearCompleted" placeholder="Year Completed">
+                      </div>
+                    </div>
+                    <div class="form-group mb-5">
+                      <textarea type="text" class="form-control" id="shsAwards" placeholder="Awards"></textarea>
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">College</h1>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="collegeSchool" placeholder="School">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="collegeCourse" placeholder="Course">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="collegeLevel" placeholder="Level">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="collegeYearCompleted" placeholder="Year Completed">
+                      </div>
+                    </div>
+                    <div class="form-group mb-5">
+                      <textarea type="text" class="form-control" id="collegeAwards" placeholder="Awards"></textarea>
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Post Graduate</h1>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="pgSchool" placeholder="School">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="pgCourse" placeholder="Course">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="pgLevel" placeholder="Level">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="pgYearCompleted" placeholder="Year Completed">
+                      </div>
+                    </div>
+                    <div class="form-group mb-5">
+                      <textarea type="text" class="form-control" id="pgAwards" placeholder="Awards"></textarea>
+                    </div>
+                    <div class="text">
+                      <h1 class="h5 text-gray-900 mb-4">Trainings</h1>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="trainingTitle" placeholder="Title">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" id="trainingSponsor" placeholder="Sponsor">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="trainingDate" placeholder="Date">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-user" id="trainingVenue" placeholder="Venue">
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-danger btn-user btn-block close-btn">
+                      Register Costumer
+                    </a>
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer copyright">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto text-light">
+            <span>Copyright &copy; GenMerch 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static '/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static '/js/sb-admin-2.min.js' %}"></script>
+
+  <!-- Custom scripts stepper-->
+  <script src="{% static '/js/demo/stepper.js' %}"></script>
+
+</body>
+
+</html>
