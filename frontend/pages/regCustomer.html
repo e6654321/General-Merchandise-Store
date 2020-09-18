@@ -357,6 +357,7 @@
               <div class="col-lg-12">
                 <div class="p-3">
                   <form class="user"><div class="steps">
+                  {% csrf_token %}
                     <div class="step">
                       <div class="step-header">
                         <div class="header">Personal Information</div>
@@ -367,67 +368,67 @@
                       <div class="js--image-preview"></div>
                       <div class="upload-options">
                         <label>
-                          <input type="file" class="image-upload" accept="image/*" />
+                          <input type="file" class="image-upload" accept="image/*" name="profile-picture"/>
                         </label>
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                        <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name" name="firstname">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleMiddleName" placeholder="Middle Name">
+                        <input type="text" class="form-control form-control-user" id="exampleMiddleName" placeholder="Middle Name" name="middlename">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                        <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name" name="lastname">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleStreet" placeholder="Street Address">
+                        <input type="text" class="form-control form-control-user" id="exampleStreet" placeholder="Street Address" name="street">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleBarangay" placeholder="Barangay">
+                        <input type="text" class="form-control form-control-user" id="exampleBarangay" placeholder="Barangay" name="barangay">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleCity" placeholder="City">
+                        <input type="text" class="form-control form-control-user" id="exampleCity" placeholder="City" name="city">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleProvince" placeholder="Province">
+                        <input type="text" class="form-control form-control-user" id="exampleProvince" placeholder="Province" name="province">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleMZip" placeholder="Zip">
+                        <input type="text" class="form-control form-control-user" id="exampleMZip" placeholder="Zip" name="zip">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleCountry" placeholder="Country">
+                        <input type="text" class="form-control form-control-user" id="exampleCountry" placeholder="Country" name="country">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="religion" placeholder="Religion">
+                        <input type="text" class="form-control form-control-user" id="religion" placeholder="Religion" name="religion">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleGender" placeholder="Gender">
+                        <input type="text" class="form-control form-control-user" id="exampleGender" placeholder="Gender" name="gender">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleBirthdate" placeholder="Birthdate">
+                        <input type="text" class="form-control form-control-user" id="exampleBirthdate" placeholder="Birthdate" name="birthdate">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleStatus" placeholder="Status">
+                        <input type="text" class="form-control form-control-user" id="exampleStatus" placeholder="Status" name="status">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="height" placeholder="Height">
+                        <input type="text" class="form-control form-control-user" id="height" placeholder="Height" name="height">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="weight" placeholder="Weight">
+                        <input type="text" class="form-control form-control-user" id="weight" placeholder="Weight" name="weight">
                       </div>
                     </div>
                     <a href="#" class="btn btn-danger btn-user btn-block next-btn">
@@ -445,21 +446,21 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="spouseFirstName" placeholder="First Name">
+                        <input type="text" class="form-control form-control-user" id="spouseFirstName" placeholder="First Name" name="spousefname">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="spouseMiddleName" placeholder="Middle Name">
+                        <input type="text" class="form-control form-control-user" id="spouseMiddleName" placeholder="Middle Name" name="spousemname">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="spouseLastName" placeholder="Last Name">
+                        <input type="text" class="form-control form-control-user" id="spouseLastName" placeholder="Last Name" name="spouselname">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-9 mb-3 mb-sm-0">
-                        <input type="email" class="form-control form-control-user" id="spouseOccupation" placeholder="Occupation">
+                        <input type="email" class="form-control form-control-user" id="spouseOccupation" placeholder="Occupation" name="spouseocc">
                       </div>
                       <div class="col-sm-3 mb-5">
-                        <input type="email" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children">
+                        <input type="email" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children" name="children">
                       </div>
                     </div>
                     <div class="text">
@@ -467,34 +468,34 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="motherFirstName" placeholder="First Name">
+                        <input type="text" class="form-control form-control-user" id="motherFirstName" placeholder="First Name" name="motherfname">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="motherMiddleName" placeholder="Middle Name">
+                        <input type="text" class="form-control form-control-user" id="motherMiddleName" placeholder="Middle Name" name="mothermname">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="motherLastName" placeholder="Last Name">
+                        <input type="text" class="form-control form-control-user" id="motherLastName" placeholder="Last Name" name="motherlname">
                       </div>
                     </div>
                     <div class="form-group mb-5">
-                      <input type="text" class="form-control form-control-user" id="motherOccupation" placeholder="Occupation">
+                      <input type="text" class="form-control form-control-user" id="motherOccupation" placeholder="Occupation" name="motherocc">
                     </div>
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Father</h1>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="fatherFirstName" placeholder="First Name">
+                        <input type="text" class="form-control form-control-user" id="fatherFirstName" placeholder="First Name" name="fatherfname">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="fatherMiddleName" placeholder="Middle Name">
+                        <input type="text" class="form-control form-control-user" id="fatherMiddleName" placeholder="Middle Name" name="fathermname">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="fatherLastName" placeholder="Last Name">
+                        <input type="text" class="form-control form-control-user" id="fatherLastName" placeholder="Last Name" name="fatherlname">
                       </div>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="fatherOccupation" placeholder="Occupation">
+                      <input type="text" class="form-control form-control-user" id="fatherOccupation" placeholder="Occupation" name="fatherocc">
                     </div>
                     <a href="#" class="btn btn-danger btn-user btn-block next-btn">
                       Next
@@ -510,115 +511,117 @@
                       <h1 class="h5 text-gray-900 mb-4">Elementary</h1>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="elementarySchool" placeholder="School">
+                      <input type="text" class="form-control form-control-user" id="elementarySchool" placeholder="School" name="elemschool">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="elementaryGrade" placeholder="Grade">
+                        <input type="text" class="form-control form-control-user" id="elementaryGrade" placeholder="Grade" name="elemgrade">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="elementaryYearCompleted" placeholder="Year Completed">
+                        <input type="text" class="form-control form-control-user" id="elementaryYearCompleted" placeholder="Year Completed" name="elemyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
-                      <textarea type="text" class="form-control" id="elementaryAwards" placeholder="Awards"></textarea>
+                      <textarea type="text" class="form-control" id="elementaryAwards" placeholder="Awards" name="elemawards"></textarea>
                     </div>
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Junior High School</h1>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="jhsSchool" placeholder="School">
+                      <input type="text" class="form-control form-control-user" id="jhsSchool" placeholder="School" name="jhschool">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="jhsGrade" placeholder="Grade">
+                        <input type="text" class="form-control form-control-user" id="jhsGrade" placeholder="Grade" name="jhgrade">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed">
+                        <input type="text" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed" name="jhyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
-                      <textarea type="text" class="form-control" id="jhsAwards" placeholder="Awards"></textarea>
+                      <textarea type="text" class="form-control" id="jhsAwards" placeholder="Awards" name="jhawards"></textarea>
                     </div>
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Senior High School</h1>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="shsSchool" placeholder="School">
+                      <input type="text" class="form-control form-control-user" id="shsSchool" placeholder="School" name="shschool">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="shsStrand" placeholder="Strand">
+                        <input type="text" class="form-control form-control-user" id="shsStrand" placeholder="Strand" name="shstrand">
                       </div>
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="shsGrade" placeholder="Grade">
+                        <input type="text" class="form-control form-control-user" id="shsGrade" placeholder="Grade" name="shgrade">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="shsYearCompleted" placeholder="Year Completed">
+                        <input type="text" class="form-control form-control-user" id="shsYearCompleted" placeholder="Year Completed" name="shyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
-                      <textarea type="text" class="form-control" id="shsAwards" placeholder="Awards"></textarea>
+                      <textarea type="text" class="form-control" id="shsAwards" placeholder="Awards" name="shawards"></textarea>
                     </div>
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">College</h1>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="collegeSchool" placeholder="School">
+                      <input type="text" class="form-control form-control-user" id="collegeSchool" placeholder="School" name="clgschool">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="collegeCourse" placeholder="Course">
+                        <input type="text" class="form-control form-control-user" id="collegeCourse" placeholder="Course" name="clgcourse">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="collegeLevel" placeholder="Level">
+                        <input type="text" class="form-control form-control-user" id="collegeLevel" placeholder="Level" name="clglevel">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="collegeYearCompleted" placeholder="Year Completed">
+                        <input type="text" class="form-control form-control-user" id="collegeYearCompleted" placeholder="Year Completed" name="clgyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
-                      <textarea type="text" class="form-control" id="collegeAwards" placeholder="Awards"></textarea>
+                      <textarea type="text" class="form-control" id="collegeAwards" placeholder="Awards" name="clgawards"></textarea>
                     </div>
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Post Graduate</h1>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="pgSchool" placeholder="School">
+                      <input type="text" class="form-control form-control-user" id="pgSchool" placeholder="School" name="pgschool">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="pgCourse" placeholder="Course">
+                        <input type="text" class="form-control form-control-user" id="pgCourse" placeholder="Course" name="pgcourse">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="pgLevel" placeholder="Level">
+                        <input type="text" class="form-control form-control-user" id="pgLevel" placeholder="Level" name="pglevel">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="pgYearCompleted" placeholder="Year Completed">
+                        <input type="text" class="form-control form-control-user" id="pgYearCompleted" placeholder="Year Completed" name="pgyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
-                      <textarea type="text" class="form-control" id="pgAwards" placeholder="Awards"></textarea>
+                      <textarea type="text" class="form-control" id="pgAwards" placeholder="Awards" name="pgawards"></textarea>
                     </div>
                     <div class="text">
                       <h1 class="h5 text-gray-900 mb-4">Trainings</h1>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="trainingTitle" placeholder="Title">
+                      <input type="text" class="form-control form-control-user" id="trainingTitle" placeholder="Title" name="traintitle">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="trainingSponsor" placeholder="Sponsor">
+                        <input type="text" class="form-control form-control-user" id="trainingSponsor" placeholder="Sponsor" name="trainsponsor">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="trainingDate" placeholder="Date">
+                        <input type="text" class="form-control form-control-user" id="trainingDate" placeholder="Date" name="traindate">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="trainingVenue" placeholder="Venue">
+                        <input type="text" class="form-control form-control-user" id="trainingVenue" placeholder="Venue" name="trainvenue">
                       </div>
                     </div>
                     <a href="#" class="btn btn-danger btn-user btn-block close-btn">
-                      Register Costumer
+                      <button type="submit">
+                        Register Costumer
+                      </button>
                     </a>
                       </div>
                     </div>
