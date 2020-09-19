@@ -175,6 +175,16 @@
     .step.minimized:hover {
       background-color: rgba(0, 0, 0, 0.06);
     }
+
+    button, input[type="submit"], input[type="reset"] {
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
   </style>
 </head>
 
@@ -356,7 +366,7 @@
             <div class="card-body">
               <div class="col-lg-12">
                 <div class="p-3">
-                  <form class="user"><div class="steps">
+                  <form class="user" method="POST"><div class="steps">
                   {% csrf_token %}
                     <div class="step">
                       <div class="step-header">
@@ -374,7 +384,7 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name" name="firstname">
+                        <input required type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name" name="firstname">
                       </div>
                       <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="exampleMiddleName" placeholder="Middle Name" name="middlename">
@@ -382,7 +392,7 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name" name="lastname">
+                        <input required type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name" name="lastname">
                       </div>
                       <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="exampleStreet" placeholder="Street Address" name="street">
@@ -390,45 +400,56 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleBarangay" placeholder="Barangay" name="barangay">
+                        <input required type="text" class="form-control form-control-user" id="exampleBarangay" placeholder="Barangay" name="barangay">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleCity" placeholder="City" name="city">
+                        <input required type="text" class="form-control form-control-user" id="exampleCity" placeholder="City" name="city">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleProvince" placeholder="Province" name="province">
+                        <input required type="text" class="form-control form-control-user" id="exampleProvince" placeholder="Province" name="province">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleMZip" placeholder="Zip" name="zip">
+                        <input required type="number" class="form-control form-control-user" id="exampleMZip" placeholder="Zip" name="zip">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleCountry" placeholder="Country" name="country">
+                        <input required type="text" class="form-control form-control-user" id="exampleCountry" placeholder="Country" name="country">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="religion" placeholder="Religion" name="religion">
+                        <input required type="text" class="form-control form-control-user" id="religion" placeholder="Religion" name="religion">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleGender" placeholder="Gender" name="gender">
+                        <label for="gender">Gender</label>
+                        <select required class="form-control" id="exampleGender" name="gender">
+                          <option value="M" selected>Male</option>
+                          <option value="F">Female</option>
+                        </select>
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="exampleBirthdate" placeholder="Birthdate" name="birthdate">
+                        <label for="gender">Status</label>
+                        <select required class="form-control" id="exampleStatus" placeholder="Status" name="status">
+                          <option value="S" selected>Single</option>
+                          <option value="M">Married</option>
+                          <option value="W">Widow/er</option>
+                          <option value="D">Divorced</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="exampleStatus" placeholder="Status" name="status">
+                      <div class="col-sm-4 mb-3 mb-sm-0 mt-3">
+                        <label for="birthdate">Birthdate</label>
+                        <input required type="date" class="form-control form-control-user" id="exampleBirthdate" placeholder="Birthdate" name="birthdate">
                       </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="height" placeholder="Height" name="height">
+                      <div class="col-sm-4 mt-5">
+                        <input required type="number" step="0.01" class="form-control form-control-user" id="height" placeholder="Height" name="height">
                       </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="weight" placeholder="Weight" name="weight">
+                      <div class="col-sm-4 mt-5">
+                        <input required type="number" step="0.01" class="form-control form-control-user" id="weight" placeholder="Weight" name="weight">
                       </div>
                     </div>
                     <a href="#" class="btn btn-danger btn-user btn-block next-btn">
@@ -457,10 +478,10 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-9 mb-3 mb-sm-0">
-                        <input type="email" class="form-control form-control-user" id="spouseOccupation" placeholder="Occupation" name="spouseocc">
+                        <input type="text" class="form-control form-control-user" id="spouseOccupation" placeholder="Occupation" name="spouseocc">
                       </div>
                       <div class="col-sm-3 mb-5">
-                        <input type="email" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children" name="children">
+                        <input type="number" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children" name="children">
                       </div>
                     </div>
                     <div class="text">
@@ -515,10 +536,10 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="elementaryGrade" placeholder="Grade" name="elemgrade">
+                        <input type="number" step="0.01" min="1.0" max="100" class="form-control form-control-user" id="elementaryGrade" placeholder="Grade" name="elemgrade">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="elementaryYearCompleted" placeholder="Year Completed" name="elemyear">
+                        <input type="number" min="1900" max="{% now 'Y' %}" class="form-control form-control-user" id="elementaryYearCompleted" placeholder="Year Completed" name="elemyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
@@ -535,7 +556,7 @@
                         <input type="text" class="form-control form-control-user" id="jhsGrade" placeholder="Grade" name="jhgrade">
                       </div>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed" name="jhyear">
+                        <input type="number" step="0.01" min="1.0" max="100" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed" name="jhyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
@@ -552,10 +573,10 @@
                         <input type="text" class="form-control form-control-user" id="shsStrand" placeholder="Strand" name="shstrand">
                       </div>
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="shsGrade" placeholder="Grade" name="shgrade">
+                        <input type="number" step="0.01" min="1.0" max="100" class="form-control form-control-user" id="shsGrade" placeholder="Grade" name="shgrade">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="shsYearCompleted" placeholder="Year Completed" name="shyear">
+                        <input type="number" min="1900" max="{% now 'Y' %}" class="form-control form-control-user" id="shsYearCompleted" placeholder="Year Completed" name="shyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
@@ -572,10 +593,10 @@
                         <input type="text" class="form-control form-control-user" id="collegeCourse" placeholder="Course" name="clgcourse">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="collegeLevel" placeholder="Level" name="clglevel">
+                        <input type="number" min="1" max="5" class="form-control form-control-user" id="collegeLevel" placeholder="Level" name="clglevel">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="collegeYearCompleted" placeholder="Year Completed" name="clgyear">
+                        <input type="number" min="1900" max="{% now 'Y' %}" class="form-control form-control-user" id="collegeYearCompleted" placeholder="Year Completed" name="clgyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
@@ -592,10 +613,10 @@
                         <input type="text" class="form-control form-control-user" id="pgCourse" placeholder="Course" name="pgcourse">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="pgLevel" placeholder="Level" name="pglevel">
+                        <input type="number" min="1" max="5" class="form-control form-control-user" id="pgLevel" placeholder="Level" name="pglevel">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="pgYearCompleted" placeholder="Year Completed" name="pgyear">
+                        <input type="number" min="1900" max="{% now 'Y' %}" class="form-control form-control-user" id="pgYearCompleted" placeholder="Year Completed" name="pgyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
@@ -612,17 +633,15 @@
                         <input type="text" class="form-control form-control-user" id="trainingSponsor" placeholder="Sponsor" name="trainsponsor">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="trainingDate" placeholder="Date" name="traindate">
+                        <input type="date" class="form-control form-control-user" id="trainingDate" placeholder="Date" name="traindate">
                       </div>
                       <div class="col-sm-4">
                         <input type="text" class="form-control form-control-user" id="trainingVenue" placeholder="Venue" name="trainvenue">
                       </div>
                     </div>
-                    <a href="#" class="btn btn-danger btn-user btn-block close-btn">
-                      <button type="submit">
+                    <button type="submit" class="btn btn-danger btn-user btn-block close-btn">
                         Register Costumer
-                      </button>
-                    </a>
+                    </button>
                       </div>
                     </div>
                   </div>

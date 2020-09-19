@@ -48,6 +48,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 div.dataTables_wrapper div.dataTables_paginate {
   margin: 0;
+  padding-top: 0.8em;
   white-space: nowrap;
   text-align: right;
 }
