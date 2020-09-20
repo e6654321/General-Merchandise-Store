@@ -52,3 +52,18 @@ class CustomerCreate(forms.ModelForm):
 	class Meta:
 		model = Customer
 		fields = '__all__'
+
+class ProductCreate(forms.ModelForm):
+	category = forms.CharField(required = False)
+	name = forms.CharField(required = False)
+	brand = forms.CharField(required = False)
+	color =forms.CharField(required = False)
+	size =forms.CharField(required = False)
+	price = forms.IntegerField(required = False)
+	stock = forms.IntegerField(required = False)
+	image1 = forms.ImageField()
+	image2 = forms.ImageField()
+	image3 = forms.ImageField()
+	class Meta:
+		model = Product
+		fields = '__all__'

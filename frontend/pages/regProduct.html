@@ -222,28 +222,28 @@
                   </div>
                   <form class="user">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="productName" placeholder="Name">
+                      <input type="text" class="form-control form-control-user" name = "" id="productName" name = "productName"placeholder="Name">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productCategory" placeholder="Category">
+                        <input type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productBrand" placeholder="Brand">
+                        <input type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productColor" placeholder="Color">
+                        <input type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productDimension" placeholder="Dimension">
+                        <input type="text" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productPrice" placeholder="Price">
+                        <input type="text" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price">
                       </div>
                       <div class="col-sm-4 mb-4">
-                        <input type="text" class="form-control form-control-user" id="productStocks" placeholder="No. of Stocks">
+                        <input type="text" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -252,7 +252,7 @@
                         <div class="js--image-preview"></div>
                         <div class="upload-options">
                           <label>
-                            <input type="file" class="image-upload" accept="image/*" />
+                            <input type="file" class="image-upload" accept="image/*" name="productImage1" />
                           </label>
                         </div>
                       </div>
@@ -261,7 +261,7 @@
                         <div class="js--image-preview"></div>
                         <div class="upload-options">
                           <label>
-                            <input type="file" class="image-upload" accept="image/*" />
+                            <input type="file" class="image-upload" accept="image/*" name="productImage2"/>
                           </label>
                         </div>
                       </div>
@@ -270,14 +270,14 @@
                         <div class="js--image-preview"></div>
                         <div class="upload-options">
                           <label>
-                            <input type="file" class="image-upload" accept="image/*" />
+                            <input type="file" class="image-upload" accept="image/*" name="productImage3"/>
                           </label>
                         </div>
                       </div>
                     </div>
-                    <a href="#" class="btn btn-danger btn-user btn-block">
-                      Register Product
-                    </a>
+                    <button type="submit" class="btn btn-danger btn-user btn-block close-btn">
+                        Register Product
+                    </button>
                   </form>
                 </div>
               </div>

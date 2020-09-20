@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import View, TemplateView
 from .models import Customer
+from .models import Product
 from .forms import CustomerCreate
+from .forms import ProductCreate
 from django.http import HttpResponse
 
 # Create your views here.
@@ -120,7 +122,39 @@ class RegCustomerPageView(View):
     		return HttpResponse('Not Valid')
 
 class RegProductPageView(TemplateView):
-    template_name = 'regProduct.html'
+	def get(self,request):
+		return render(request, 'regProduct.html')
+	
+	def post(self,request):
+		form = ProductCreate(request.POST)
+		if form.is_valid():
+			name = request.POST.get("productName")
+			brand = request.POST.get("productBrand")
+			color = request.POST.get("productColor")
+			category = request.POST.get("productCategory")
+			size = request.POST.get("productDimension")
+			price = request.POST.get("productPrice")
+			stock = request.POST.get("productStocks")
+			image1 = request.POST.get("productImage1")
+			image2 = request.POST.get("productImage2")
+			image3 = request.POST.get("productImage3")
+
+			form = Product(
+				category = category,
+				name = name,
+				brand = brand,
+				color = color,
+				size = size,
+				price = price,
+				stock = stock,
+				image1 = image1,
+				image2 = image2,
+				image3 = image3)
+			form.save()
+			return HttpResponse('Product Record Saved!')
+		else:
+			print(form.errors)
+			return HttpResponse('Not Valid')
 
 #get rows in table
 class TableCustomerPageView(TemplateView):
@@ -129,7 +163,10 @@ class TableCustomerPageView(TemplateView):
 		return render(request, 'tableCustomer.html', {'customers': customers})
 
 class TableProductPageView(TemplateView):
-    template_name = 'tableProduct.html'
+	template_name = 'tableProduct.html'
+#  def get(self, request):
+#	products = Product.objects.all()
+#	return render(request, 'tableProduct.html', {'products': products})
 
 class ErrorPageView(TemplateView):
     template_name = '404.html'

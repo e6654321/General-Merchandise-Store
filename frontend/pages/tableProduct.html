@@ -232,6 +232,7 @@
                     </tr>
                   </tfoot>
                   <tbody>
+                    {% for product in products }
                     <tr>
                       <td >
                         <a data-toggle="modal" data-target="#deleteModal">
@@ -241,44 +242,12 @@
                           <i class="fas fa-edit fa-sm"></i>
                         </a>
                       </td>
-                      <td>2011/04/25</td>
-                      <td>School Supplies</td>
-                      <td>Monggol</td>
-                      <td>No. 2 Pencil</td>
-                      <td>10.00</td>
-                      <td>48</td>
-                    </tr>
-                    <tr>
-                      <td >
-                        <a data-toggle="modal" data-target="#deleteModal">
-                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
-                        </a>
-                        <a data-toggle="modal" data-target="#updateModal">
-                          <i class="fas fa-edit fa-sm"></i>
-                        </a>
-                      </td>
-                      <td>2011/07/25</td>
-                      <td>Appliances</td>
-                      <td>Mitsubishi</td>
-                      <td>Oven</td>
-                      <td>6,453.00</td>
-                      <td>18</td>
-                    </tr>
-                    <tr>
-                      <td >
-                        <a data-toggle="modal" data-target="#deleteModal">
-                          <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
-                        </a>
-                        <a data-toggle="modal" data-target="#updateModal">
-                          <i class="fas fa-edit fa-sm"></i>
-                        </a>
-                      </td>
-                      <td>2009/01/12</td>
-                      <td>Food Stuffs</td>
-                      <td>Magnolia</td>
-                      <td>Fruitdrink</td>
-                      <td>13.00</td>
-                      <td>37</td>
+                      <td>{{product.date_registered}}</td>
+                      <td>{{product.category}}</td>
+                      <td>{{product.brand}}</td>
+                      <td>{{product.name}}</td>
+                      <td>{{product.price}}</td>
+                      <td>{{product.stock}}</td>
                     </tr>
                   </tbody>
                 </table>
