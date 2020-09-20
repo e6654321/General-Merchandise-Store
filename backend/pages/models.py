@@ -76,4 +76,23 @@ class Training(models.Model):
 
 	def __str__(self):
 		pass
-    
+	
+class Product(models.Model):
+	date_registered = models.DateField(auto_now_add=True)
+	category = models.CharField(max_length=30,null = False)
+	name = models.CharField(max_length=30,null = False)
+	brand = models.CharField(max_length=30,null = False)
+	color = models.CharField(max_length=30,null = False)
+	size = models.CharField(max_length=30,null = False)
+	price = models.IntegerField(default=0)
+	stock = models.IntegerField(default=0)
+	image1 = models.ImageField()
+	image2 = models.ImageField()
+	image3 = models.ImageField()
+
+	class Meta:
+		db_table = "Product"
+		
+	def __str__(self):
+		return self.name
+
