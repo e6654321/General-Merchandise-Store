@@ -54,16 +54,17 @@ class CustomerCreate(forms.ModelForm):
 		fields = '__all__'
 
 class ProductCreate(forms.ModelForm):
+	date_registered = forms.DateField(required=False)
 	category = forms.CharField(required = False)
-	name = forms.CharField(required = False)
+	pname = forms.CharField(required = False)
 	brand = forms.CharField(required = False)
 	color =forms.CharField(required = False)
 	size =forms.CharField(required = False)
-	price = forms.IntegerField(required = False)
+	price = forms.FloatField(required = False)
 	stock = forms.IntegerField(required = False)
-	image1 = forms.ImageField()
-	image2 = forms.ImageField()
-	image3 = forms.ImageField()
+	image1 = forms.ImageField(required = False)
+	image2 = forms.ImageField(required = False)
+	image3 = forms.ImageField(required = False)
 	class Meta:
 		model = Product
 		fields = '__all__'

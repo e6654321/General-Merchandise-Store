@@ -234,10 +234,10 @@
                     {% for customer in customers %}
                     <tr>
                       <td >
-                        <a data-toggle="modal" data-target="#deleteModal">
+                        <a data-toggle="modal" data-target="#deleteModal-{{customer.id}}">
                           <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
                         </a>
-                        <a data-toggle="modal" data-target="#updateModal">
+                        <a data-toggle="modal" data-target="#updateModal-{{customer.id}}">
                           <i class="fas fa-edit fa-sm"></i>
                         </a>
                       </td>

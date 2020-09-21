@@ -220,30 +220,31 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-5">Product Information</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name = "" id="productName" name = "productName"placeholder="Name">
+                      <input required type="text" class="form-control form-control-user" id="productName"name = "productName" placeholder="Name">
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category">
+                        <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand">
+                        <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color">
+                        <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-4 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension">
+                        <input required type="text" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension">
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price">
+                        <input require type="number" step="0.01" min="0" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price">
                       </div>
                       <div class="col-sm-4 mb-4">
-                        <input type="text" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks">
+                        <input required type="number" step="1" min="0" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks">
                       </div>
                     </div>
                     <div class="form-group row">

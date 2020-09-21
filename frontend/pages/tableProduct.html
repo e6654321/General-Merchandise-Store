@@ -232,23 +232,24 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    {% for product in products }
+                    {% for product in products %}
                     <tr>
                       <td >
-                        <a data-toggle="modal" data-target="#deleteModal">
+                        <a data-toggle="modal" data-target="#deleteModal-{{product.id}} ">
                           <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
                         </a>
-                        <a data-toggle="modal" data-target="#updateModal">
+                        <a data-toggle="modal" data-target="#updateModal-{{product.id}}">
                           <i class="fas fa-edit fa-sm"></i>
                         </a>
                       </td>
                       <td>{{product.date_registered}}</td>
                       <td>{{product.category}}</td>
                       <td>{{product.brand}}</td>
-                      <td>{{product.name}}</td>
+                      <td>{{product.pname}}</td>
                       <td>{{product.price}}</td>
                       <td>{{product.stock}}</td>
                     </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>

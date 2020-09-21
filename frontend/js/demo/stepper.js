@@ -7,11 +7,24 @@ $(document).ready(function() {
   $('.next-btn').on('click', function() {
     let cur = $(this).closest('.step');
     let next = $(cur).next();
-    $(cur).addClass('minimized');
-    setTimeout(function() {
-      $(next).removeClass('minimized');
-      curOpen = $(next);
-    }, 400);
+    var curInputs = cur.find(":input").filter('[required]:visible');
+    var isValid = true;
+    $(".form-control").removeClass("is-invalid");
+    for(var i=0; i<curInputs.length; i++){
+        if (!curInputs[i].validity.valid){
+    console.log(curInputs[i]);
+            isValid = false;
+            $(curInputs[i]).closest(".form-control").addClass("is-invalid");
+        }
+    }
+
+    if(isValid){
+      $(cur).addClass('minimized');
+      setTimeout(function() {
+        $(next).removeClass('minimized');
+        curOpen = $(next);
+      }, 400);
+    }
   });
   
   $('.close-btn').on('click', function() {
@@ -44,4 +57,4 @@ $(document).ready(function() {
       }
     }
   });
-})
+});
