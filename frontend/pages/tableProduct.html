@@ -241,6 +241,77 @@
                         <a data-toggle="modal" data-target="#updateModal-{{product.id}}">
                           <i class="fas fa-edit fa-sm"></i>
                         </a>
+
+                    <!-- Update Modal-->
+                    <div class="modal fade" id="updateModal-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="updateModal-{{product.id}}" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title text-danger" id="updateModalLabel">View Product</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group row">
+                              <div class="col-sm-4 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" id="name-{{product.id}}" placeholder="Name" value="{{product.pname}}">
+                              </div>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="category-{{product.id}}" placeholder="Category" value="{{product.category}}">
+                              </div>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="brand-{{product.id}}" placeholder="Brand" value="{{product.brand}}">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-4 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" id="c-{{product.id}}" placeholder="Color" value="{{product.color}}">
+                              </div>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="size-{{product.id}}" placeholder="Dimension" value="{{product.size}}">
+                              </div>
+                              <div class="col-sm-4">
+                                <input type="number" step="0.01" min="0" class="form-control form-control-user" id="price-{{product.id}}" placeholder="Price" value="{{product.price}}">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-6 mb-4 mb-sm-0 mt-3">
+                                <label class="control-label" for="date">Date Registered</label>
+                                <input class="form-control form-control-user" id="regdate-{{product.id}}" name="date" placeholder="MM/DD/YYY" type="text" value="{{product.date_registered}}" disabled   />
+                              </div>
+                              <div class="col-sm-6 mt-5">
+                                <input type="number" step="1" min="0" class="form-control form-control-user" id="price-{{product.id}}" placeholder="Stock" value="{{product.stock}}">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                            <a class="btn btn-danger" data-dismiss="modal" href="#">Update</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Delete Modal-->
+                    <div class="modal fade" id="deleteModal-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal-{{product.id}}" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModal-{{customer.id}}">Delete {{product.pname}}?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">You can no longer recover {{product.pname}} after deletion.</div>
+                          <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-danger" data-dismiss="modal" href="#">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                       </td>
                       <td>{{product.date_registered}}</td>
                       <td>{{product.category}}</td>
@@ -282,70 +353,6 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-  <!-- Update Modal-->
-  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-danger" id="updateModalLabel">View Row</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group row">
-            <div class="col-sm-4 mb-4 mb-sm-0">
-              <label class="control-label" for="regdate">Date Registered</label>
-              <input class="form-control form-control-user" id="regdate" name="date" placeholder="MM/DD/YYY" type="text"/>
-            </div>
-            <div class="col-sm-4">
-              <label class="control-label" for="category"></label>
-              <input type="text" class="form-control form-control-user" id="category" placeholder="Category">
-            </div>
-            <div class="col-sm-4">
-              <label class="control-label" for="brand"></label>
-              <input type="text" class="form-control form-control-user" id="brand" placeholder="Brand">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-4 mb-3 mb-sm-0">
-              <input type="text" class="form-control form-control-user" id="name" placeholder="Name">
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control form-control-user" id="price" placeholder="Price">
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control form-control-user" id="number" placeholder="No. of Items">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-          <a class="btn btn-danger" data-dismiss="modal" href="#">Update</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Modal-->
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModal">Are you sure?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">You can no longer recover this row after deletion.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" data-dismiss="modal" href="#">Delete</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
