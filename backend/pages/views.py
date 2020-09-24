@@ -115,7 +115,9 @@ class RegCustomerPageView(View):
 							post_graduate_year_completed=pgyear,
 							post_graduate_awards=pgawards)
 			form.save()
-			customers = Customer.objects.all()	
+			customers = Customer.objects.all()
+			print(Customer.objects.get(id=1))
+			print(customers)
 			return render(request, 'tableCustomer.html', {'customers': customers})
 		else:
 			print(form.errors)

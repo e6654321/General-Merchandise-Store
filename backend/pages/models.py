@@ -4,16 +4,16 @@ from django.db import models
 
 #initialize table
 class Customer(models.Model):
-	MARITAL_STATUS=(
+	MARITAL_STATUS=[
 		('S','Single'),
 		('M','Married'),
 		('W','Widow/er'),
 		('D','Divorced'),
-	)
-	NATURAL_GENDER=(
+	]
+	NATURAL_GENDER=[
 		('M','Male'),
 		('F','Female'),
-	)
+	]
 	picture = models.ImageField()
 	date_registered = models.DateField(auto_now_add=True)
 	first_name = models.CharField(max_length=50,default='',null=False)
@@ -60,8 +60,18 @@ class Customer(models.Model):
 	post_graduate_year_completed = models.IntegerField(default=0)
 	post_graduate_awards = models.TextField(default='',null=False)
 
+	class Meta:
+		verbose_name = "Customer"
+		verbose_name_plural = "Customers"
+
 	def __str__(self):
-		return self.name
+		return self.first_name
+
+	def status_verbose(self):
+		return dict(Customer.MARITAL_STATUS)[self.status]
+
+	def gender_verbose(self):
+		return dict(Customer.NATURAL_GENDER)[self.gender]
 
 class Training(models.Model):
 	title = models.CharField(max_length=50,default='',null=False)
@@ -90,6 +100,10 @@ class Product(models.Model):
 	image2 = models.ImageField()
 	image3 = models.ImageField()
 
+	class Meta:
+		verbose_name = "Product"
+		verbose_name_plural = "Products"
+
 	def __str__(self):
-		return self.name
+		return self.pname
 
