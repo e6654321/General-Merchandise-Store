@@ -247,32 +247,35 @@
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title text-danger" id="updateModalLabel">View Product</h5>
+                            <h5 class="modal-title text-danger" id="updateModalLabel-{{product.id}}">View Product</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                           </div>
+                          <form class="form" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="product_id" value="{{product.id}}" hidden>
                           <div class="modal-body">
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="name-{{product.id}}" placeholder="Name" value="{{product.pname}}">
+                                <input type="text" class="form-control form-control-user" name="product_name" placeholder="Name" value="{{product.pname}}" required>
                               </div>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="category-{{product.id}}" placeholder="Category" value="{{product.category}}">
+                                <input type="text" class="form-control form-control-user" name="product_category" placeholder="Category" value="{{product.category}}" required>
                               </div>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="brand-{{product.id}}" placeholder="Brand" value="{{product.brand}}">
+                                <input type="text" class="form-control form-control-user" name="product_brand" placeholder="Brand" value="{{product.brand}}" required>
                               </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="c-{{product.id}}" placeholder="Color" value="{{product.color}}">
+                                <input type="text" class="form-control form-control-user" name="product_color" placeholder="Color" value="{{product.color}}" required>
                               </div>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="size-{{product.id}}" placeholder="Dimension" value="{{product.size}}">
+                                <input type="text" class="form-control form-control-user" name="product_size" placeholder="Dimension" value="{{product.size}}" required>
                               </div>
                               <div class="col-sm-4">
-                                <input type="number" step="0.01" min="0" class="form-control form-control-user" id="price-{{product.id}}" placeholder="Price" value="{{product.price}}">
+                                <input type="number" step="0.01" min="0" class="form-control form-control-user" name="product_price" placeholder="Price" value="{{product.price}}" required>
                               </div>
                             </div>
                             <div class="form-group row">
@@ -281,14 +284,15 @@
                                 <input class="form-control form-control-user" id="regdate-{{product.id}}" name="date" placeholder="MM/DD/YYY" type="text" value="{{product.date_registered}}" disabled   />
                               </div>
                               <div class="col-sm-6 mt-5">
-                                <input type="number" step="1" min="0" class="form-control form-control-user" id="price-{{product.id}}" placeholder="Stock" value="{{product.stock}}">
+                                <input type="number" step="1" min="0" class="form-control form-control-user" name="product_stock" placeholder="Stock" value="{{product.stock}}" required>
                               </div>
                             </div>
                           </div>
                           <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                            <a class="btn btn-danger" data-dismiss="modal" href="#">Update</a>
+                            <button class="btn btn-danger" name="btnUpdate" type="submit">Update</button>
                           </div>
+                        </form>
                         </div>
                       </div>
                     </div>
@@ -305,8 +309,12 @@
                           </div>
                           <div class="modal-body">You can no longer recover {{product.pname}} after deletion.</div>
                           <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-danger" data-dismiss="modal" href="#">Delete</a>
+                            <form class="form" method="POST">
+                              {% csrf_token %}
+                              <input type="text" name="product_id" value="{{product.id}}" hidden>
+                              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                              <button class="btn btn-danger" name="btnDelete" type="submit">Delete</button>
+                            </form>
                           </div>
                         </div>
                       </div>
