@@ -165,11 +165,70 @@ class TableCustomerPageView(TemplateView):
 		customers = Customer.objects.all()
 		return render(request, 'tableCustomer.html', {'customers': customers})
 
+	def post(self, request):
+		if 'btnUpdate' in request.POST:
+			customer_id = request.POST.get("customer_id")
+			fname = request.POST.get("customer_firstname")
+			mname = request.POST.get("customer_middlename")
+			lname = request.POST.get("customer_lastname")
+			date = request.POST.get("date")
+			customer_street = request.POST.get("customer_street")
+			customer_brgy = request.POST.get("customer_brgy")
+			customer_city = request.POST.get("customer_city")
+			customer_province = request.POST.get("customer_province")
+			customer_zip = request.POST.get("customer_zip")
+			customer_country = request.POST.get("customer_country")
+			customer_religion = request.POST.get("customer_religion")
+			customer_gender = request.POST.get("customer_gender")
+			customer_height = request.POST.get("customer_height")
+			customer_status = request.POST.get("customer_status")
+			customer_weight = request.POST.get("customer_weight")
+			update_product = Product.objects.filter(
+							first_name=fname,
+							middle_name=mname,
+							last_name=lname,
+							street=customer_street,
+							brgy=customer_brgy,
+							city=customer_city,
+							province=customer_province,
+							zip_code=customer_zip,
+							birthdate=date,
+							status=customer_status,
+							gender=customer_gender,
+							country=customer_country,
+							religion=customer_religion,
+							height=customer_height,
+							weight=customer_weight,
+							religion=religion)
+		elif 'btnDelete' in request.POST:
+			product_id = request.POST.get("product_id")
+			delete_product = Product.objects.filter(id = product_id).delete()
+		products = Product.objects.all()
+		return render(request, 'tableProduct.html', {'products': products})
+
 class TableProductPageView(TemplateView):
 	# template_name = 'tableProduct.html'
 	def get(self, request):
 		products = Product.objects.all()
 		return render(request, 'tableProduct.html', {'products': products})
+
+	def post(self, request):
+		if 'btnUpdate' in request.POST:
+			product_id = request.POST.get("product_id")
+			pname = request.POST.get("product_name")
+			category = request.POST.get("product_category")
+			brand = request.POST.get("product_brand")
+			color = request.POST.get("product_color")
+			size = request.POST.get("product_size")
+			price = request.POST.get("product_price")
+			stock = request.POST.get("product_stock")
+			update_product = Product.objects.filter(id = product_id).update(category = category,pname = pname,brand = brand,color = color,size = size,price = price,stock = stock)
+		elif 'btnDelete' in request.POST:
+			product_id = request.POST.get("product_id")
+			delete_product = Product.objects.filter(id = product_id).delete()
+		products = Product.objects.all()
+		return render(request, 'tableProduct.html', {'products': products})
+
 
 class ErrorPageView(TemplateView):
 	template_name = '404.html'

@@ -1,9 +1,10 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 
 #initialize table
-class Customer(models.Model):
+class Person(models.Model):
 	MARITAL_STATUS=[
 		('S','Single'),
 		('M','Married'),
@@ -14,8 +15,6 @@ class Customer(models.Model):
 		('M','Male'),
 		('F','Female'),
 	]
-	picture = models.ImageField()
-	date_registered = models.DateField(auto_now_add=True)
 	first_name = models.CharField(max_length=50,default='',null=False)
 	middle_name = models.CharField(max_length=50,default='',null=False)
 	last_name = models.CharField(max_length=50,default='',null=False)
@@ -61,17 +60,29 @@ class Customer(models.Model):
 	post_graduate_awards = models.TextField(default='',null=False)
 
 	class Meta:
-		verbose_name = "Customer"
-		verbose_name_plural = "Customers"
+		verbose_name = "Person"
+		verbose_name_plural = "Persons"
 
 	def __str__(self):
 		return self.first_name
 
 	def status_verbose(self):
-		return dict(Customer.MARITAL_STATUS)[self.status]
+		return dict(Person.MARITAL_STATUS)[self.status]
 
 	def gender_verbose(self):
-		return dict(Customer.NATURAL_GENDER)[self.gender]
+		return dict(Person.NATURAL_GENDER)[self.gender]
+
+
+class Customer(Person):
+	picture = models.ImageField()
+	date_registered = models.DateField(auto_now_add=True)
+
+	class Meta:
+		verbose_name = "Customer"
+		verbose_name_plural = "Customers"
+
+	def __str__(self):
+		return self.first_name
 
 class Training(models.Model):
 	title = models.CharField(max_length=50,default='',null=False)
