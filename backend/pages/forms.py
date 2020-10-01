@@ -13,6 +13,7 @@ class CustomerCreate(forms.ModelForm):
 	brgy = forms.CharField(required=False)
 	city = forms.CharField(required=False)
 	province = forms.CharField(required=False)
+	country = forms.CharField(required=False)
 	zip_code = forms.IntegerField(required=False)
 	birthdate = forms.DateField(required=False)
 	status = forms.CharField(required=False)

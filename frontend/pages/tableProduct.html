@@ -35,7 +35,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'pages:home' %}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-shopping-bag"></i>
         </div>
@@ -47,7 +47,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard' %}">
+        <a class="nav-link" href="{% url 'pages:dashboard' %}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -68,8 +68,8 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
+            <a class="collapse-item" href="{% url 'pages:tablecustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'pages:tableproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -90,8 +90,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
+            <a class="collapse-item" href="{% url 'pages:regcustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'pages:regproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -275,16 +275,16 @@
                                 <input type="text" class="form-control form-control-user" name="product_size" placeholder="Dimension" value="{{product.size}}" required>
                               </div>
                               <div class="col-sm-4">
-                                <input type="number" step="0.01" min="0" class="form-control form-control-user" name="product_price" placeholder="Price" value="{{product.price}}" required>
+                                <input type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" name="product_price" placeholder="Price" value="{{product.price}}" required>
                               </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-6 mb-4 mb-sm-0 mt-3">
                                 <label class="control-label" for="date">Date Registered</label>
-                                <input class="form-control form-control-user" id="regdate-{{product.id}}" name="date" placeholder="MM/DD/YYY" type="text" value="{{product.date_registered}}" disabled   />
+                                <input class="form-control form-control-user" id="regdate-{{product.id}}" name="date" placeholder="MM/DD/YYY" type="date" value="{{product.date_registered|date:'Y-m-d'}}" disabled   />
                               </div>
                               <div class="col-sm-6 mt-5">
-                                <input type="number" step="1" min="0" class="form-control form-control-user" name="product_stock" placeholder="Stock" value="{{product.stock}}" required>
+                                <input type="number" step="1" min="0"  max="10000" class="form-control form-control-user" name="product_stock" placeholder="Stock" value="{{product.stock}}" required>
                               </div>
                             </div>
                           </div>
@@ -375,7 +375,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
+          <a class="btn btn-danger" href="{% url 'pages:login' %}">Logout</a>
         </div>
       </div>
     </div>

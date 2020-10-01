@@ -10,6 +10,7 @@ from .views import (
 	ErrorPageView
 )
 
+app_name = 'pages'
 urlpatterns = [
 	path('',HomePageView.as_view(),name='home'),
 	path('index/',HomePageView.as_view(),name='index'),
