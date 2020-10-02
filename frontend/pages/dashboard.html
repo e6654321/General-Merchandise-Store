@@ -35,7 +35,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'pages:index' %}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-shopping-bag"></i>
         </div>
@@ -47,7 +47,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'dashboard' %}">
+        <a class="nav-link" href="{% url 'pages:dashboard' %}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -68,8 +68,8 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
+            <a class="collapse-item" href="{% url 'pages:tablecustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'pages:tableproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -90,8 +90,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
+            <a class="collapse-item" href="{% url 'pages:regcustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'pages:regproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -200,8 +200,8 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <div class="row">
-              <a href="{% url 'regcustomer' %}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-3"><i class="fas fa-plus fa-sm text-white-50"></i> Add Customer</a>
-              <a href="{% url 'regproduct' %}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-3"><i class="fas fa-plus fa-sm text-white-50"></i> Add Product</a>
+              <a href="{% url 'pages:regcustomer' %}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-3"><i class="fas fa-plus fa-sm text-white-50"></i> Add Customer</a>
+              <a href="{% url 'pages:regproduct' %}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-3"><i class="fas fa-plus fa-sm text-white-50"></i> Add Product</a>
             </div>
           </div>
 
@@ -323,7 +323,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
+          <a class="btn btn-danger" href="{% url 'pages:login' %}">Logout</a>
         </div>
       </div>
     </div>
