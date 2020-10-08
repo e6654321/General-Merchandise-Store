@@ -162,7 +162,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Customer Info-->
-                                  <form class="user" method="POST">
+                                  <form id="purchaseForm" class="user" method="POST">
                                     {% csrf_token %}
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
@@ -597,7 +597,10 @@
                     setTexts();
                 });
             });
-
+            $('#purchaseForm').on('submit', function(e){
+                $('#successModal').modal('show');
+                 e.preventDefault();
+            });
             function setTexts(){
                 $("#productCategory").val($(ctgry).val());
                 $("#productBrand").val($(brnd).val());
