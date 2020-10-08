@@ -10,23 +10,38 @@ from django.conf import settings
 # Create your views here.
 class HomePageView(TemplateView):
 	def get(self, request):
-		customers = Customer.objects.all()
 		products = Product.objects.all()
-		return render(request, 'index.html', {'customers': customers, 'products': products})
+		return render(request, 'index.html', {'products': products})
 
 	def post(self, request):
+		products = Product.objects.all()
 		form = OrderCreate(request.POST)
 		if form.is_valid():
-			customer = request.POST.get("customer")
-			product = request.POST.get("product")
+			customer_id=request.POST.get("customerId")
+			address = request.POST.get("customerAddress")
+			contact_number = request.POST.get("customerNumber")
+			email = request.POST.get("customerEmail")
+			fname = request.POST.get("customerName")
+			product_id = request.POST.get("productName")
 			quantity = request.POST.get("quantity")
-			form = Order(
-						customer=customers,
-						product=product,
-						quantity=quantity
-						)
-			form.save()
-			return redirect('pages:index')
+			try:
+				customer = Customer.objects.get(first_name=fname,person_ptr_id=customer_id)
+				product = Product.objects.get(id=product_id)
+				print(customer)
+				print(product)
+				form = Order(
+							address=address,
+							contact_number=contact_number,
+							email=email,
+							customer=customer,
+							product=product,
+							quantity=quantity
+							)
+				form.save()
+				return render(request, 'index.html', {'isValid': 1, 'products': products})
+			except Exception as e:
+				print(e)
+				return render(request, 'index.html', {'isValid': 0, 'products': products})
 		else:
 			print(form.errors)
 			return HttpResponse('Not Valid')
@@ -257,11 +272,6 @@ class TableProductPageView(TemplateView):
 		# products = Product.objects.all()
 		# return render(request, 'tableProduct.html', {'products': products})
 		return redirect('pages:tableproduct')
-
-class HomePageView(TemplateView):
-	def get(self, request):
-		products = Product.objects.all()
-		return render(request, 'index.html', {'products': products, 'media_url':'/media/'})
 
 class TableOrderPageView(TemplateView):
 	# template_name = 'tableProduct.html'

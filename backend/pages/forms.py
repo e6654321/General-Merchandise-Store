@@ -72,6 +72,9 @@ class ProductCreate(forms.ModelForm):
 
 class OrderCreate(forms.ModelForm):
 	date_registered = forms.DateField(required=False)
+	address = forms.CharField(required=False)
+	contact_number = forms.CharField(required=False)
+	email = forms.CharField(required=False)
 	customer = forms.IntegerField(required=False)
 	product = forms.IntegerField(required = False)
 	quantity = forms.IntegerField(required = False)

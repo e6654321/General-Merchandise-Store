@@ -120,6 +120,9 @@ class Product(models.Model):
 
 class Order(models.Model):
 	date_registered = models.DateField(auto_now_add=True)
+	address = models.CharField(max_length=30,null = False)
+	contact_number = models.CharField(max_length=11,null = False)
+	email = models.CharField(max_length=30,null = False)
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=0)
