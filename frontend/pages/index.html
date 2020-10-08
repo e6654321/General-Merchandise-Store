@@ -162,7 +162,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Customer Info-->
-                                  <form class="user" method="POST">
+                                  <form id="purchaseForm" class="user" method="POST">                             
                                     {% csrf_token %}
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
@@ -278,6 +278,24 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!--Successful Purchase Modal-->
+        <div class="modal fade" id = "successModal" role = "dialog" aria-labelledby = "successModalLabel"aria-hidden = "true">
+            <div class="modal-dialog vertical-align-center" role="document">
+                <div class="modal-content shadow-lg">
+                  <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <h5 class="modal-title text-success mx-auto mb-2" >Purchase Succesful!</h5>
+                  <h7 class="modal-title mx-auto" >You can expect your item/s to be delivered</h7>
+                  <h7 class="modal-title mx-auto mb-2" >in 7 to 14 business days!</h7>
+                  <a class="btn btn-success btn-user mx-auto mb-3" href="{% url 'pages:index' %}" aria-label="Close">
+                      Okay
+                  </a>
+                </div>
+              </div>
         </div>
         <!--Inner Modal
         {% for product in products %}
@@ -579,7 +597,6 @@
                     setTexts();
                 });
             });
-
             function setTexts(){
                 $("#productCategory").val($(ctgry).val());
                 $("#productBrand").val($(brnd).val());
