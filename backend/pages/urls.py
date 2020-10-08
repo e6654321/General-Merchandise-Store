@@ -7,6 +7,7 @@ from .views import (
 	RegProductPageView,
 	TableCustomerPageView,
 	TableProductPageView,
+	TableOrderPageView,
 	ErrorPageView
 )
 
@@ -19,6 +20,7 @@ urlpatterns = [
 	path('register/customer/',RegCustomerPageView.as_view(),name='regcustomer'),
 	path('register/product/',RegProductPageView.as_view(),name='regproduct'),
 	path('report/customer/',TableCustomerPageView.as_view(),name='tablecustomer'),
-	path('report/product',TableProductPageView.as_view(),name='tableproduct'),
+	path('report/product/',TableProductPageView.as_view(),name='tableproduct'),
+	path('report/order/',TableOrderPageView.as_view(),name='tableorder'),
 	path('404/',ErrorPageView.as_view(),name='error'),
 ]

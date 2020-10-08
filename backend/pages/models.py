@@ -73,7 +73,6 @@ class Person(models.Model):
 	def gender_verbose(self):
 		return dict(Person.NATURAL_GENDER)[self.gender]
 
-
 class Customer(Person):
 	picture = models.ImageField()
 	date_registered = models.DateField(auto_now_add=True)
@@ -119,3 +118,12 @@ class Product(models.Model):
 	def __str__(self):
 		return self.pname
 
+class Order(models.Model):
+	date_registered = models.DateField(auto_now_add=True)
+	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+	quantity = models.IntegerField(default=0)
+
+	class Meta:
+		verbose_name = "Order"
+		verbose_name_plural = "Orders"
