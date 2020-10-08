@@ -2,13 +2,34 @@ from django.shortcuts import render, redirect
 from django.views.generic import View, TemplateView
 from .models import Customer
 from .models import Product
-from .forms import CustomerCreate, ProductCreate
+from .models import Order
+from .forms import CustomerCreate, ProductCreate, OrderCreate
 from django.http import HttpResponse
 from django.conf import settings
 
 # Create your views here.
 class HomePageView(TemplateView):
-	template_name = 'index.html'
+	def get(self, request):
+		customers = Customer.objects.all()
+		products = Product.objects.all()
+		return render(request, 'index.html', {'customers': customers, 'products': products})
+
+	def post(self, request):
+		form = OrderCreate(request.POST)
+		if form.is_valid():
+			customer = request.POST.get("customer")
+			product = request.POST.get("product")
+			quantity = request.POST.get("quantity")
+			form = Order(
+						customer=customers,
+						product=product,
+						quantity=quantity
+						)
+			form.save()
+			return redirect('pages:index')
+		else:
+			print(form.errors)
+			return HttpResponse('Not Valid')
 
 class DashboardPageView(TemplateView):
 	template_name = 'dashboard.html'
@@ -241,6 +262,19 @@ class HomePageView(TemplateView):
 	def get(self, request):
 		products = Product.objects.all()
 		return render(request, 'index.html', {'products': products, 'media_url':'/media/'})
+
+class TableOrderPageView(TemplateView):
+	# template_name = 'tableProduct.html'
+	def get(self, request):
+		orders = Order.objects.all()
+		return render(request, 'tableOrder.html', {'orders': orders})
+
+	def post(self, request):
+		if 'btnDelete' in request.POST:
+			order_id = request.POST.get("order_id")
+			delete_order = Order.objects.filter(id = order_id).delete()
+			print('record deleted')
+		return redirect('pages:tableorder')
 
 class ErrorPageView(TemplateView):
 	template_name = '404.html'

@@ -69,3 +69,13 @@ class ProductCreate(forms.ModelForm):
 	class Meta:
 		model = Product
 		fields = '__all__'
+
+class OrderCreate(forms.ModelForm):
+	date_registered = forms.DateField(required=False)
+	customer = forms.IntegerField(required=False)
+	product = forms.IntegerField(required = False)
+	quantity = forms.IntegerField(required = False)
+
+	class Meta:
+		model = Order
+		fields = '__all__'
