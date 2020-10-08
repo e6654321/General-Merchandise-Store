@@ -200,6 +200,14 @@
                                           <h6 class="m-0 font-weight-bold text-danger">Product List</h6>
                                         </div>
                                         <div class="card-body">
+                                        {% for product in products %}
+                                          <input id="productCategory-{{product.id}}" value="{{product.category}}" hidden/>
+                                          <input id="productBrand-{{product.id}}" hidden value="{{product.brand}}"/>
+                                          <input id="productColor-{{product.id}}" hidden value="{{product.color}}"/>
+                                          <input id="productDimension-{{product.id}}" hidden value="{{product.size}}"/>
+                                          <input id="productPrice-{{product.id}}" hidden value="{{product.price}}"/>
+                                          <input id="productStocks-{{product.id}}" hidden value="{{product.stock}}"/>
+                                        {% endfor %}
                                           <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                               <thead>
@@ -213,14 +221,7 @@
                                                   <td>
                                                     <select required class="form-control" id="productName" placeholder="Name" name="productName">
                                                     {% for product in products %}
-                                                      <option value="{{product.id}}" >{{product.pname}}
-                                                        </option>
-                                                      <span id="productCategory-{{product.id}}" class="d-none">{{product.category}}</span>
-                                                      <span id="productBrand-{{product.id}}" class="d-none">{{product.brand}}</span>
-                                                      <span id="productColor-{{product.id}}" class="d-none">{{product.color}}</span>
-                                                      <span id="productDimension-{{product.id}}" class="d-none">{{product.size}}</span>
-                                                      <span id="productPrice-{{product.id}}" class="d-none">{{product.price}}</span>
-                                                      <span id="productStocks-{{product.id}}" class="d-none">{{product.stock}}</span>
+                                                      <option value="{{product.id}}" >{{product.pname}}</option>
                                                     {% endfor %}
                                                     </select>
                                                   </td>
@@ -235,24 +236,29 @@
                                             <div class="form-group row">
                                               <div class="col-sm-4 mb-3 mb-sm-0">
                                                 <label class="control-label" for="productCategory">Category</label>
-                                                <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category" disabled value="">
+                                                <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category" disabled>
                                               </div>
                                               <div class="col-sm-4">
-                                                <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand">
+                                                <label class="control-label" for="productBrand">Brand</label>
+                                                <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand" disabled>
                                               </div>
                                               <div class="col-sm-4">
-                                                <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color">
+                                                <label class="control-label" for="productColor">Color</label>
+                                                <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color" disabled>
                                               </div>
                                             </div>
                                             <div class="form-group row">
                                               <div class="col-sm-4 mb-3 mb-sm-0">
-                                                <input required type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension (ex. 20x30)">
+                                                <label class="control-label" for="productDimension">Dimension</label>
+                                                <input required type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension (ex. 20x30)" disabled>
                                               </div>
                                               <div class="col-sm-4">
-                                                <input require type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price">
+                                                <label class="control-label" for="productPrice">Price</label>
+                                                <input require type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price" disabled>
                                               </div>
                                               <div class="col-sm-4 mb-4">
-                                                <input required type="number" step="1" min="0" max="10000" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks">
+                                                <label class="control-label" for="productStocks">Stocks</label>
+                                                <input required type="number" step="1" min="0" max="10000" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks" disabled>
                                               </div>
                                             </div>
                                           </div>
@@ -553,20 +559,35 @@
 
         <!-- Select change script -->
         <script type="text/javascript">
+            var ctgry = "#productCategory-1";
+            var brnd = "#productBrand-1";
+            var color = "#productColor-1";
+            var size = "#productDimension-1";
+            var price = "#productPrice-1";
+            var stock = "#productStocks-1";
+
             $( document ).ready(function() {
-                var ctgry = "#productCategory-1";
+                setTexts();
+
                 $( "#productName" ).change(function() {
                     ctgry = "#productCategory-"+$( "#productName" ).val();
-                    $("#productCategory").val($(ctgry).val());
-                    console.log($(ctgry).val());
-                  //   <input id="productCategory-{{product.id}}" hidden value="{{product.category}}">
-                  // <input id="productBrand-{{product.id}}" hidden value="{{product.brand}}">
-                  // <input id="productColor-{{product.id}}" hidden value="{{product.color}}">
-                  // <input id="productDimension-{{product.id}}" hidden value="{{product.size}}">
-                  // <input id="productPrice-{{product.id}}" hidden value="{{product.price}}">
-                  // <input id="productStocks-{{product.id}}" hidden value="{{product.stock}}">
+                    brnd = "#productBrand-"+$( "#productName" ).val();
+                    color = "#productColor-"+$( "#productName" ).val();
+                    size = "#productDimension-"+$( "#productName" ).val();
+                    price = "#productPrice-"+$( "#productName" ).val();
+                    stock = "#productStocks-"+$( "#productName" ).val();
+                    setTexts();
                 });
             });
+
+            function setTexts(){
+                $("#productCategory").val($(ctgry).val());
+                $("#productBrand").val($(brnd).val());
+                $("#productColor").val($(color).val());
+                $("#productDimension").val($(size).val());
+                $("#productPrice").val($(price).val());
+                $("#productStocks").val($(stock).val());
+            }
         </script>
     </body>
 </html>
