@@ -54,6 +54,10 @@
     // Collapse the navbar when page is scrolled
     $(window).scroll(navbarCollapse);
   
+    $('#purchaseForm').on('submit', function(e){
+      $('#successModal').modal('show');
+       e.preventDefault();
+  });
     // Floating label headings for the contact form
     $(function() {
       $("body").on("input propertychange", ".floating-label-form-group", function(e) {

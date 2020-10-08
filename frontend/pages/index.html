@@ -597,10 +597,6 @@
                     setTexts();
                 });
             });
-            $('#purchaseForm').on('submit', function(e){
-                $('#successModal').modal('show');
-                 e.preventDefault();
-            });
             function setTexts(){
                 $("#productCategory").val($(ctgry).val());
                 $("#productBrand").val($(brnd).val());
