@@ -162,6 +162,8 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Customer Info-->
+                                  <form class="user" method="POST">
+                                    {% csrf_token %}
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h6 class="m-0 font-weight-bold text-danger">Customer Info</h6>
@@ -169,23 +171,25 @@
                                         <div class="card-body">
                                           <div class="col-lg-12">
                                             <div class="p-3">
-                                              <form class="user" method="POST">
-                                                {% csrf_token %}
-                                                <div class="form-group">
-                                                  <input required type="text" class="form-control form-control-user" id="customerName"name = "customerName" placeholder="Name">
+                                                <div class="form-group row">
+                                                  <div class="col-sm-6">
+                                                  <input required type="text" class="form-control form-control-user" id="customerName" name= "customerName" placeholder="First Name">
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                    <input required type="number" step="1" class="form-control form-control-user" id="customerId" name = "customerId" placeholder="ID #">
+                                                  </div>
                                                 </div>
                                                 <div class="form-group">
                                                   <input required type="text" class="form-control form-control-user" id="customerAddress"name = "customerAddress" placeholder="Address">
                                                 </div>
                                                 <div class="form-group row">
                                                   <div class="col-sm-6">
-                                                    <input required type="text" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number">
+                                                    <input required type="tel" maxlength="11" pattern="09[0-9]{9}" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number">
                                                   </div>
                                                   <div class="col-sm-6">
-                                                    <input required type="text" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email">
+                                                    <input required type="text" pattern="^[^ ]+@[^ ]+\.[a-z]{2,6}$" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email">
                                                   </div>
                                                 </div>
-                                              </form>
                                             </div>
                                           </div>
                                         </div>
@@ -196,6 +200,14 @@
                                           <h6 class="m-0 font-weight-bold text-danger">Product List</h6>
                                         </div>
                                         <div class="card-body">
+                                        {% for product in products %}
+                                          <input id="productCategory-{{product.id}}" value="{{product.category}}" hidden/>
+                                          <input id="productBrand-{{product.id}}" hidden value="{{product.brand}}"/>
+                                          <input id="productColor-{{product.id}}" hidden value="{{product.color}}"/>
+                                          <input id="productDimension-{{product.id}}" hidden value="{{product.size}}"/>
+                                          <input id="productPrice-{{product.id}}" hidden value="{{product.price}}"/>
+                                          <input id="productStocks-{{product.id}}" hidden value="{{product.stock}}"/>
+                                        {% endfor %}
                                           <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                               <thead>
@@ -205,35 +217,53 @@
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                {% for product in products %}
                                                 <tr>
                                                   <td>
-                                                    <div class = "btn-group ">
-                                                        <button type = "button" class ="btn btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                            {{product.pname}}
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" ><strong>Name:</strong> {{product.brand}}</a>
-                                                            <a class="dropdown-item" ><strong>Brand:</strong> {{product.brand}}</a>
-                                                            <a class="dropdown-item" ><strong>Category:</strong> {{product.category}}</a>
-                                                            <a class="dropdown-item" ><strong>Dimensions:</strong> {{product.size}}</a>
-                                                            <a class="dropdown-item" ><strong>Available Stock:</strong> {{product.stock}}</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" ><strong>Price:</strong> {{product.price}}</a>
-                                                          <!-- <img class="dropdown-item rounded" src="/media/{{product.image1}}"alt = "image3">-->
-                                                          </div>
-                                                    </div>
+                                                    <select required class="form-control" id="productName" placeholder="Name" name="productName">
+                                                    {% for product in products %}
+                                                      <option value="{{product.id}}" >{{product.pname}}</option>
+                                                    {% endfor %}
+                                                    </select>
                                                   </td>
                                                   <td>
-                                                       <input type="text" class="form-control form-control-user" pattern="\d*" maxlength="4">
+                                                       <input type="number" min="1" class="form-control form-control-user" pattern="\d*" maxlength="4" name="quantity" value="1" required>
                                                   </td>
                                                 </tr>
-                                                {% endfor %}
                                               </tbody>
                                             </table>
                                           </div>
+                                          <div class="container">
+                                            <div class="form-group row">
+                                              <div class="col-sm-4 mb-3 mb-sm-0">
+                                                <label class="control-label" for="productCategory">Category</label>
+                                                <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category" disabled>
+                                              </div>
+                                              <div class="col-sm-4">
+                                                <label class="control-label" for="productBrand">Brand</label>
+                                                <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand" disabled>
+                                              </div>
+                                              <div class="col-sm-4">
+                                                <label class="control-label" for="productColor">Color</label>
+                                                <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color" disabled>
+                                              </div>
+                                            </div>
+                                            <div class="form-group row">
+                                              <div class="col-sm-4 mb-3 mb-sm-0">
+                                                <label class="control-label" for="productDimension">Dimension</label>
+                                                <input required type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension (ex. 20x30)" disabled>
+                                              </div>
+                                              <div class="col-sm-4">
+                                                <label class="control-label" for="productPrice">Price</label>
+                                                <input require type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price" disabled>
+                                              </div>
+                                              <div class="col-sm-4 mb-4">
+                                                <label class="control-label" for="productStocks">Stocks</label>
+                                                <input required type="number" step="1" min="0" max="10000" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks" disabled>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#successModal">
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">
                                             Purchase
                                         </button>
                                     </div> 
@@ -241,32 +271,13 @@
                                     <i class="fas fa-times fa-fw"></i>
                                         Cancel
                                     </button>
+                                </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Successful Purchase Modal-->
-        <div class="modal fade" id = "successModal" role = "dialog" aria-labelledby = "successModalLabel"aria-hidden = "true">
-            <div class="modal-dialog vertical-align-center" role="document">
-                <div class="modal-content shadow-lg">
-                  <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <h5 class="modal-title text-success mx-auto mb-2" >Purchase Succesful!</h5>
-                  <h7 class="modal-title mx-auto" >You can expect your item/s to be delivered</h7>
-                  <h7 class="modal-title mx-auto mb-2" >in 7 to 14 business days!</h7>
-                  <a class="btn btn-success btn-user mx-auto mb-3" href="{% url 'pages:index' %}" aria-label="Close">
-                      Okay
-                  </a>
-                </div>
-              </div>
-        </div>
-
         </div>
         <!--Inner Modal
         {% for product in products %}
@@ -545,5 +556,38 @@
         <script src="{% static '/assets/mail/contact_me.js' %}"></script>
         <!-- Core theme JS-->
         <script src="{% static '/js/scripts.js' %}"></script>
+
+        <!-- Select change script -->
+        <script type="text/javascript">
+            var ctgry = "#productCategory-1";
+            var brnd = "#productBrand-1";
+            var color = "#productColor-1";
+            var size = "#productDimension-1";
+            var price = "#productPrice-1";
+            var stock = "#productStocks-1";
+
+            $( document ).ready(function() {
+                setTexts();
+
+                $( "#productName" ).change(function() {
+                    ctgry = "#productCategory-"+$( "#productName" ).val();
+                    brnd = "#productBrand-"+$( "#productName" ).val();
+                    color = "#productColor-"+$( "#productName" ).val();
+                    size = "#productDimension-"+$( "#productName" ).val();
+                    price = "#productPrice-"+$( "#productName" ).val();
+                    stock = "#productStocks-"+$( "#productName" ).val();
+                    setTexts();
+                });
+            });
+
+            function setTexts(){
+                $("#productCategory").val($(ctgry).val());
+                $("#productBrand").val($(brnd).val());
+                $("#productColor").val($(color).val());
+                $("#productDimension").val($(size).val());
+                $("#productPrice").val($(price).val());
+                $("#productStocks").val($(stock).val());
+            }
+        </script>
     </body>
 </html>
