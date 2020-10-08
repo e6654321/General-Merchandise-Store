@@ -162,6 +162,8 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Customer Info-->
+                                  <form class="user" method="POST">
+                                    {% csrf_token %}
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h6 class="m-0 font-weight-bold text-danger">Customer Info</h6>
@@ -169,23 +171,25 @@
                                         <div class="card-body">
                                           <div class="col-lg-12">
                                             <div class="p-3">
-                                              <form class="user" method="POST">
-                                                {% csrf_token %}
-                                                <div class="form-group">
-                                                  <input required type="text" class="form-control form-control-user" id="customerName"name = "customerName" placeholder="Name">
+                                                <div class="form-group row">
+                                                  <div class="col-sm-6">
+                                                  <input required type="text" class="form-control form-control-user" id="customerName" name= "customerName" placeholder="First Name">
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                    <input required type="number" step="1" class="form-control form-control-user" id="customerId" name = "customerId" placeholder="ID #">
+                                                  </div>
                                                 </div>
                                                 <div class="form-group">
                                                   <input required type="text" class="form-control form-control-user" id="customerAddress"name = "customerAddress" placeholder="Address">
                                                 </div>
                                                 <div class="form-group row">
                                                   <div class="col-sm-6">
-                                                    <input required type="text" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number">
+                                                    <input required type="tel" maxlength="11" pattern="09[0-9]{9}" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number">
                                                   </div>
                                                   <div class="col-sm-6">
-                                                    <input required type="text" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email">
+                                                    <input required type="text" pattern="^[^ ]+@[^ ]+\.[a-z]{2,6}$" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email">
                                                   </div>
                                                 </div>
-                                              </form>
                                             </div>
                                           </div>
                                         </div>
@@ -205,35 +209,55 @@
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                {% for product in products %}
                                                 <tr>
                                                   <td>
-                                                    <div class = "btn-group ">
-                                                        <button type = "button" class ="btn btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                            {{product.pname}}
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" ><strong>Name:</strong> {{product.brand}}</a>
-                                                            <a class="dropdown-item" ><strong>Brand:</strong> {{product.brand}}</a>
-                                                            <a class="dropdown-item" ><strong>Category:</strong> {{product.category}}</a>
-                                                            <a class="dropdown-item" ><strong>Dimensions:</strong> {{product.size}}</a>
-                                                            <a class="dropdown-item" ><strong>Available Stock:</strong> {{product.stock}}</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" ><strong>Price:</strong> {{product.price}}</a>
-                                                          <!-- <img class="dropdown-item rounded" src="/media/{{product.image1}}"alt = "image3">-->
-                                                          </div>
-                                                    </div>
+                                                    <select required class="form-control" id="productName" placeholder="Name" name="productName">
+                                                    {% for product in products %}
+                                                      <option value="{{product.id}}" >{{product.pname}}
+                                                        </option>
+                                                      <span id="productCategory-{{product.id}}" class="d-none">{{product.category}}</span>
+                                                      <span id="productBrand-{{product.id}}" class="d-none">{{product.brand}}</span>
+                                                      <span id="productColor-{{product.id}}" class="d-none">{{product.color}}</span>
+                                                      <span id="productDimension-{{product.id}}" class="d-none">{{product.size}}</span>
+                                                      <span id="productPrice-{{product.id}}" class="d-none">{{product.price}}</span>
+                                                      <span id="productStocks-{{product.id}}" class="d-none">{{product.stock}}</span>
+                                                    {% endfor %}
+                                                    </select>
                                                   </td>
                                                   <td>
-                                                       <input type="text" class="form-control form-control-user" pattern="\d*" maxlength="4">
+                                                       <input type="number" min="1" class="form-control form-control-user" pattern="\d*" maxlength="4" name="quantity" value="1" required>
                                                   </td>
                                                 </tr>
-                                                {% endfor %}
                                               </tbody>
                                             </table>
                                           </div>
+                                          <div class="container">
+                                            <div class="form-group row">
+                                              <div class="col-sm-4 mb-3 mb-sm-0">
+                                                <label class="control-label" for="productCategory">Category</label>
+                                                <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category" disabled value="">
+                                              </div>
+                                              <div class="col-sm-4">
+                                                <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand">
+                                              </div>
+                                              <div class="col-sm-4">
+                                                <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color">
+                                              </div>
+                                            </div>
+                                            <div class="form-group row">
+                                              <div class="col-sm-4 mb-3 mb-sm-0">
+                                                <input required type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension (ex. 20x30)">
+                                              </div>
+                                              <div class="col-sm-4">
+                                                <input require type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price">
+                                              </div>
+                                              <div class="col-sm-4 mb-4">
+                                                <input required type="number" step="1" min="0" max="10000" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks">
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">
                                             Purchase
                                         </button>
                                     </div> 
@@ -241,6 +265,7 @@
                                     <i class="fas fa-times fa-fw"></i>
                                         Cancel
                                     </button>
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -525,5 +550,23 @@
         <script src="{% static '/assets/mail/contact_me.js' %}"></script>
         <!-- Core theme JS-->
         <script src="{% static '/js/scripts.js' %}"></script>
+
+        <!-- Select change script -->
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                var ctgry = "#productCategory-1";
+                $( "#productName" ).change(function() {
+                    ctgry = "#productCategory-"+$( "#productName" ).val();
+                    $("#productCategory").val($(ctgry).val());
+                    console.log($(ctgry).val());
+                  //   <input id="productCategory-{{product.id}}" hidden value="{{product.category}}">
+                  // <input id="productBrand-{{product.id}}" hidden value="{{product.brand}}">
+                  // <input id="productColor-{{product.id}}" hidden value="{{product.color}}">
+                  // <input id="productDimension-{{product.id}}" hidden value="{{product.size}}">
+                  // <input id="productPrice-{{product.id}}" hidden value="{{product.price}}">
+                  // <input id="productStocks-{{product.id}}" hidden value="{{product.stock}}">
+                });
+            });
+        </script>
     </body>
 </html>
