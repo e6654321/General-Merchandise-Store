@@ -231,7 +231,7 @@
                                             </table>
                                           </div>
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#successModal">
                                             Purchase
                                         </button>
                                     </div> 
@@ -245,6 +245,26 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!--Successful Purchase Modal-->
+        <div class="modal fade" id = "successModal" role = "dialog" aria-labelledby = "successModalLabel"aria-hidden = "true">
+            <div class="modal-dialog vertical-align-center" role="document">
+                <div class="modal-content shadow-lg">
+                  <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <h5 class="modal-title text-success mx-auto mb-2" >Purchase Succesful!</h5>
+                  <h7 class="modal-title mx-auto" >You can expect your item/s to be delivered</h7>
+                  <h7 class="modal-title mx-auto mb-2" >in 7 to 14 business days!</h7>
+                  <a class="btn btn-success btn-user mx-auto mb-3" href="{% url 'pages:index' %}" aria-label="Close">
+                      Okay
+                  </a>
+                </div>
+              </div>
+        </div>
+
         </div>
         <!--Inner Modal
         {% for product in products %}
