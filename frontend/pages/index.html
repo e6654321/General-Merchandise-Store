@@ -31,6 +31,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " data-toggle="modal" data-target="#buyModal">Buy</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Core Values</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " data-toggle="modal" data-target="#portfolioModalAbout">About Us</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded  " data-toggle="modal"data-target="#portfolioModalContact">Contact</a></li>
@@ -194,55 +195,49 @@
                                         </div>
                                         <div class="card-body">
                                           <div class="table-responsive">
-                                            <p id="date_filter">
-                                              <span id="date-label-from" class="date-label">From: </span><input name="min" id="min" type="text">
-                                              <span id="date-label-to" class="date-label">To:<input name="max" id="max" type="text">
-                                            </p>
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                               <thead>
                                                 <tr>
-                                                  <th></th>
-                                                  <th>Date Registered</th>
-                                                  <th>Category</th>
-                                                  <th>Brand</th>
                                                   <th>Name</th>
-                                                  <th>Price</th>
-                                                  <th>No. of Items</th>
+                                                  <th>Quantity</th>
                                                 </tr>
                                               </thead>
-                                              <tfoot>
-                                                <tr>
-                                                  <th></th>
-                                                  <th>Date Registered</th>
-                                                  <th>Category</th>
-                                                  <th>Brand</th>
-                                                  <th>Name</th>
-                                                  <th>Price</th>
-                                                  <th>No. of Items</th>
-                                                </tr>
-                                              </tfoot>
                                               <tbody>
                                                 {% for product in products %}
                                                 <tr>
-                                                  <td>{{product.date_registered}}</td>
-                                                  <td>{{product.category}}</td>
-                                                  <td>{{product.brand}}</td>
-                                                  <td>{{product.pname}}</td>
-                                                  <td>{{product.price}}</td>
-                                                  <td>{{product.stock}}</td>
+                                                  <td>
+                                                    <div class = "btn-group ">
+                                                        <button type = "button" class ="btn btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                            {{product.pname}}
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" ><strong>Name:</strong> {{product.brand}}</a>
+                                                            <a class="dropdown-item" ><strong>Brand:</strong> {{product.brand}}</a>
+                                                            <a class="dropdown-item" ><strong>Category:</strong> {{product.category}}</a>
+                                                            <a class="dropdown-item" ><strong>Dimensions:</strong> {{product.size}}</a>
+                                                            <a class="dropdown-item" ><strong>Available Stock:</strong> {{product.stock}}</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" ><strong>Price:</strong> {{product.price}}</a>
+                                                          <!-- <img class="dropdown-item rounded" src="/media/{{product.image1}}"alt = "image3">-->
+                                                          </div>
+                                                    </div>
+                                                  </td>
+                                                  <td>
+                                                       <input type="text" class="form-control form-control-user" pattern="\d*" maxlength="4">
+                                                  </td>
                                                 </tr>
                                                 {% endfor %}
                                               </tbody>
                                             </table>
                                           </div>
                                         </div>
-                                        
-                                        <button type="submit" class="btn btn-danger btn-user btn-block close-btn">
+                                        <button class="btn btn-primary btn-user btn-block">
                                             Purchase
                                         </button>
-                                      </div> <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
-                                        Close Window
+                                    </div> 
+                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <i class="fas fa-times fa-fw"></i>
+                                        Cancel
                                     </button>
                                 </div>
                             </div>
@@ -251,6 +246,70 @@
                 </div>
             </div>
         </div>
+        <!--Inner Modal
+        {% for product in products %}
+        <div class="modal fade" id="productDetails" tabindex="-1" role="dialog" aria-labelledby="productDetails" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-danger" id="productDetailsLabel">Details</h5>
+                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <form class="form" method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="product_id" value="{{product.id}}" hidden>
+                <div class="modal-body">
+                  <div class="form-group row">
+                    <div class="col-sm-5 mb-3 mb-sm-0">
+                        <p>Name</p>
+                      <input type="text" class="form-control form-control-user" name="product_name" placeholder="Name" value="{{product.pname}}" disabled>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Category</p>
+                      <input type="text" class="form-control form-control-user" name="product_category" placeholder="Category" value="{{product.category}}" disabled>
+                    </div>
+                    <div class="col-sm-3"><p>Stock</p>
+                      <input type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" name="product_stock" placeholder="Price" value="{{product.stock}}" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <p>Brand</p>
+                      <input type="text" class="form-control form-control-user" name="product_brand" placeholder="Brand" value="{{product.brand}}" disabled>
+                    </div>
+                    <div class="col-sm- ">
+                        <p>Dimensions</p>
+                      <input type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" name="product_size" placeholder="Dimension" value="{{product.size}}" disabled>
+                    </div>
+                    <div class="col-sm-3"><p>Price (Php)</p>
+                      <input type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" name="product_price" placeholder="Price" value="{{product.price}}" disabled>
+                    </div>
+                  </div>
+                 
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <img class="rounded" src="/media/{{product.image1}}" alt = "image1">
+                    </div>
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <img class="rounded" src="/media/{{product.image2}}"alt = "image2">
+                    </div>
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <img class="rounded" src="/media/{{product.image3}}"alt = "image3">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                  <button class="btn btn-danger" name="btnAddToCart" type="submit">Add to Cart</button>
+                </div>
+              </form>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    -->
         <!-- Portfolio Modals-->
         <!-- Portfolio Modal 1-->
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">

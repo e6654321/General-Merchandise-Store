@@ -4,6 +4,7 @@ from .models import Customer
 from .models import Product
 from .forms import CustomerCreate, ProductCreate
 from django.http import HttpResponse
+from django.conf import settings
 
 # Create your views here.
 class HomePageView(TemplateView):
@@ -236,6 +237,10 @@ class TableProductPageView(TemplateView):
 		# return render(request, 'tableProduct.html', {'products': products})
 		return redirect('pages:tableproduct')
 
+class HomePageView(TemplateView):
+	def get(self, request):
+		products = Product.objects.all()
+		return render(request, 'index.html', {'products': products, 'media_url':'/media/'})
 
 class ErrorPageView(TemplateView):
 	template_name = '404.html'
