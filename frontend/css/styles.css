@@ -47,6 +47,10 @@
   box-sizing: border-box;
 }
 
+.quantityInput{
+  width: 20px !important;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -2166,7 +2170,7 @@ textarea.form-control {
   margin-left: -1.25rem;
 }
 .form-check-input[disabled] ~ .form-check-label, .form-check-input:disabled ~ .form-check-label {
-  color: #6c757d;
+  color: #e9ecef;
 }
 
 .form-check-label {
@@ -3529,7 +3533,7 @@ input[type=button].btn-block {
   border-color: #98f1df;
 }
 .custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
-  color: #6c757d;
+  color: #e9ecef;
 }
 .custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before {
   background-color: #e9ecef;

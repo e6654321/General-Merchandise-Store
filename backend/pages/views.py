@@ -5,6 +5,7 @@ from .models import Product
 from .models import Order
 from .forms import CustomerCreate, ProductCreate, OrderCreate
 from django.http import HttpResponse
+from django.conf import settings
 
 # Create your views here.
 class HomePageView(TemplateView):
@@ -257,6 +258,10 @@ class TableProductPageView(TemplateView):
 		# return render(request, 'tableProduct.html', {'products': products})
 		return redirect('pages:tableproduct')
 
+class HomePageView(TemplateView):
+	def get(self, request):
+		products = Product.objects.all()
+		return render(request, 'index.html', {'products': products, 'media_url':'/media/'})
 
 class TableOrderPageView(TemplateView):
 	# template_name = 'tableProduct.html'
@@ -273,25 +278,3 @@ class TableOrderPageView(TemplateView):
 
 class ErrorPageView(TemplateView):
 	template_name = '404.html'
-
-#not yet implemented
-#def update_customer(request, customer_id):
-#	customer_id = int(customer_id)
-#	try:
-#		customer_sel = Customer.objects.get(id = customer_id)
-#	except Customer.DoesNotExist:
-#		return redirect('regcustomer')
-#	customer_form = CustomerCreate(request.POST or None, instance = customer_sel)
-#	if customer_form.is_valid():
-#		customer_form.save()
-#		return redirect('regcustomer')
-#	return render(request, 'pages/tableCustomer.html', {'upload_form':customer_form})
-#
-#def delete_customer(request, customer_id):
-#	customer_id = int(customer_id)
-#	try:
-#		customer_sel = Customer.objects.get(id = customer_id)
-#	except Customer.DoesNotExist:
-#		return redirect('regcustomer')
-#	customer_sel.delete()
-#	return redirect('regcustomer')

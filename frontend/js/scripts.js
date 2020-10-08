@@ -64,6 +64,10 @@
         $(this).removeClass("floating-label-form-group-with-focus");
       });
     });
-  
+
+    $("button[data-dismiss-modal=modal2]").click(function(){
+      $('#productDetails').modal('hide');
+    });
+
   })(jQuery); // End of use strict
   
