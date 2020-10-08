@@ -26,15 +26,15 @@
               </div>
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">GenMerch</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
+                    
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Core Values</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" data-target="#portfolioModalAbout">About Us</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal"data-target="#portfolioModalContact">Contact</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'index' %}">Admin Login</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " data-toggle="modal" data-target="#portfolioModalAbout">About Us</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded  " data-toggle="modal"data-target="#portfolioModalContact">Contact</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'pages:login' %}">Admin Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -97,8 +97,7 @@
                         </div>
                     </div>
             </div>
-        </section>
-
+        </section>          
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container">
@@ -139,6 +138,118 @@
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
         <div class="scroll-to-top d-lg-none position-fixed">
             <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        </div>
+        <!-- Buy Modal-->
+        <div class="portfolio-modal modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModal" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Modal Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Buy Items</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-dollar-sign"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Modal Customer Info-->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-danger">Customer Info</h6>
+                                        </div>
+                                        <div class="card-body">
+                                          <div class="col-lg-12">
+                                            <div class="p-3">
+                                              <form class="user" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                  <input required type="text" class="form-control form-control-user" id="customerName"name = "customerName" placeholder="Name">
+                                                </div>
+                                                <div class="form-group">
+                                                  <input required type="text" class="form-control form-control-user" id="customerAddress"name = "customerAddress" placeholder="Address">
+                                                </div>
+                                                <div class="form-group row">
+                                                  <div class="col-sm-6">
+                                                    <input required type="text" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number">
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                    <input required type="text" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email">
+                                                  </div>
+                                                </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <!-- Modal Product Table-->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                          <h6 class="m-0 font-weight-bold text-danger">Product List</h6>
+                                        </div>
+                                        <div class="card-body">
+                                          <div class="table-responsive">
+                                            <p id="date_filter">
+                                              <span id="date-label-from" class="date-label">From: </span><input name="min" id="min" type="text">
+                                              <span id="date-label-to" class="date-label">To:<input name="max" id="max" type="text">
+                                            </p>
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                              <thead>
+                                                <tr>
+                                                  <th></th>
+                                                  <th>Date Registered</th>
+                                                  <th>Category</th>
+                                                  <th>Brand</th>
+                                                  <th>Name</th>
+                                                  <th>Price</th>
+                                                  <th>No. of Items</th>
+                                                </tr>
+                                              </thead>
+                                              <tfoot>
+                                                <tr>
+                                                  <th></th>
+                                                  <th>Date Registered</th>
+                                                  <th>Category</th>
+                                                  <th>Brand</th>
+                                                  <th>Name</th>
+                                                  <th>Price</th>
+                                                  <th>No. of Items</th>
+                                                </tr>
+                                              </tfoot>
+                                              <tbody>
+                                                {% for product in products %}
+                                                <tr>
+                                                  <td>{{product.date_registered}}</td>
+                                                  <td>{{product.category}}</td>
+                                                  <td>{{product.brand}}</td>
+                                                  <td>{{product.pname}}</td>
+                                                  <td>{{product.price}}</td>
+                                                  <td>{{product.stock}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-danger btn-user btn-block close-btn">
+                                            Purchase
+                                        </button>
+                                      </div> <button class="btn btn-primary" data-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Portfolio Modals-->
         <!-- Portfolio Modal 1-->
