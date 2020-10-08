@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View, TemplateView
 from .models import Customer
 from .models import Product
@@ -16,7 +16,7 @@ class LoginPageView(TemplateView):
 	template_name = 'login.html'
 
 #add new row in table db
-class RegCustomerPageView(View):
+class RegCustomerPageView(TemplateView):
 	def get(self, request):
 		return render(request, 'regCustomer.html')
 
@@ -78,6 +78,7 @@ class RegCustomerPageView(View):
 							brgy=brgy,
 							city=city,
 							province=prov,
+							country=country,
 							zip_code=zipcode,
 							birthdate=birthdate,
 							status=status,
@@ -115,10 +116,10 @@ class RegCustomerPageView(View):
 							post_graduate_year_completed=pgyear,
 							post_graduate_awards=pgawards)
 			form.save()
-			customers = Customer.objects.all()
-			print(Customer.objects.get(id=1))
-			print(customers)
-			return render(request, 'tableCustomer.html', {'customers': customers})
+			# customers = Customer.objects.all()
+			# print(Customer.objects.get(id=1))
+			# print(customers)
+			return redirect('pages:tablecustomer')
 		else:
 			print(form.errors)
 			return HttpResponse('Not Valid')
@@ -153,8 +154,9 @@ class RegProductPageView(TemplateView):
 				image2 = image2,
 				image3 = image3)
 			form.save()
-			products = Product.objects.all()
-			return render(request, 'tableProduct.html', {'products': products})
+			# products = Product.objects.all()
+			# return redirect(request, 'tableProduct.html', {'products': products})
+			return redirect('pages:tableproduct')
 		else:
 			print(form.errors)
 			return HttpResponse('Not Valid')
@@ -171,7 +173,8 @@ class TableCustomerPageView(TemplateView):
 			fname = request.POST.get("customer_firstname")
 			mname = request.POST.get("customer_middlename")
 			lname = request.POST.get("customer_lastname")
-			date = request.POST.get("date")
+			date = request.POST.get("customer_regdate")
+			bdate = request.POST.get("customer_birthdate")
 			customer_street = request.POST.get("customer_street")
 			customer_brgy = request.POST.get("customer_brgy")
 			customer_city = request.POST.get("customer_city")
@@ -183,7 +186,7 @@ class TableCustomerPageView(TemplateView):
 			customer_height = request.POST.get("customer_height")
 			customer_status = request.POST.get("customer_status")
 			customer_weight = request.POST.get("customer_weight")
-			update_product = Product.objects.filter(
+			update_customer = Customer.objects.filter(id=customer_id).update(
 							first_name=fname,
 							middle_name=mname,
 							last_name=lname,
@@ -192,19 +195,21 @@ class TableCustomerPageView(TemplateView):
 							city=customer_city,
 							province=customer_province,
 							zip_code=customer_zip,
-							birthdate=date,
+							birthdate=bdate,
 							status=customer_status,
 							gender=customer_gender,
 							country=customer_country,
 							religion=customer_religion,
 							height=customer_height,
 							weight=customer_weight,
-							religion=religion)
+							)
 		elif 'btnDelete' in request.POST:
-			product_id = request.POST.get("product_id")
-			delete_product = Product.objects.filter(id = product_id).delete()
-		products = Product.objects.all()
-		return render(request, 'tableProduct.html', {'products': products})
+			customer_id = request.POST.get("customer_id")
+			delete_customer = Customer.objects.filter(id = customer_id).delete()
+			print('record deleted')
+		# customers = Customer.objects.all()
+		# return render(request, 'tableCustomer.html', {'customers': customers})
+		return redirect('pages:tablecustomer')
 
 class TableProductPageView(TemplateView):
 	# template_name = 'tableProduct.html'
@@ -226,31 +231,33 @@ class TableProductPageView(TemplateView):
 		elif 'btnDelete' in request.POST:
 			product_id = request.POST.get("product_id")
 			delete_product = Product.objects.filter(id = product_id).delete()
-		products = Product.objects.all()
-		return render(request, 'tableProduct.html', {'products': products})
+			print('record deleted')
+		# products = Product.objects.all()
+		# return render(request, 'tableProduct.html', {'products': products})
+		return redirect('pages:tableproduct')
 
 
 class ErrorPageView(TemplateView):
 	template_name = '404.html'
 
 #not yet implemented
-def update_customer(request, customer_id):
-	customer_id = int(customer_id)
-	try:
-		customer_sel = Customer.objects.get(id = customer_id)
-	except Customer.DoesNotExist:
-		return redirect('regcustomer')
-	customer_form = CustomerCreate(request.POST or None, instance = customer_sel)
-	if customer_form.is_valid():
-		customer_form.save()
-		return redirect('regcustomer')
-	return render(request, 'pages/tableCustomer.html', {'upload_form':customer_form})
-
-def delete_customer(request, customer_id):
-	customer_id = int(customer_id)
-	try:
-		customer_sel = Customer.objects.get(id = customer_id)
-	except Customer.DoesNotExist:
-		return redirect('regcustomer')
-	customer_sel.delete()
-	return redirect('regcustomer')
+#def update_customer(request, customer_id):
+#	customer_id = int(customer_id)
+#	try:
+#		customer_sel = Customer.objects.get(id = customer_id)
+#	except Customer.DoesNotExist:
+#		return redirect('regcustomer')
+#	customer_form = CustomerCreate(request.POST or None, instance = customer_sel)
+#	if customer_form.is_valid():
+#		customer_form.save()
+#		return redirect('regcustomer')
+#	return render(request, 'pages/tableCustomer.html', {'upload_form':customer_form})
+#
+#def delete_customer(request, customer_id):
+#	customer_id = int(customer_id)
+#	try:
+#		customer_sel = Customer.objects.get(id = customer_id)
+#	except Customer.DoesNotExist:
+#		return redirect('regcustomer')
+#	customer_sel.delete()
+#	return redirect('regcustomer')

@@ -170,7 +170,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'pages:home' %}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-shopping-bag"></i>
         </div>
@@ -182,7 +182,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard' %}">
+        <a class="nav-link" href="{% url 'pages:dashboard' %}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -203,8 +203,8 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'tablecustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'tableproduct' %}">Products</a>
+            <a class="collapse-item" href="{% url 'pages:tablecustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'pages:tableproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -225,8 +225,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'regcustomer' %}">Customers</a>
-            <a class="collapse-item" href="{% url 'regproduct' %}">Products</a>
+            <a class="collapse-item" href="{% url 'pages:regcustomer' %}">Customers</a>
+            <a class="collapse-item" href="{% url 'pages:regproduct' %}">Products</a>
           </div>
         </div>
       </li>
@@ -384,7 +384,7 @@
                         <input required type="text" class="form-control form-control-user" id="exampleProvince" placeholder="Province" name="province">
                       </div>
                       <div class="col-sm-6">
-                        <input required type="number" class="form-control form-control-user" id="exampleMZip" placeholder="Zip" name="zip">
+                        <input required type="number" step="1" min="0" class="form-control form-control-user" id="exampleMZip" placeholder="Zip" name="zip">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -419,10 +419,10 @@
                         <input required type="date" class="form-control form-control-user" id="exampleBirthdate" placeholder="Birthdate" name="birthdate">
                       </div>
                       <div class="col-sm-4 mt-5">
-                        <input required type="number" step="0.01" class="form-control form-control-user" id="height" placeholder="Height" name="height">
+                        <input required type="number" step="0.01" min="0" max="8" class="form-control form-control-user" id="height" placeholder="Height" name="height">
                       </div>
                       <div class="col-sm-4 mt-5">
-                        <input required type="number" step="0.01" class="form-control form-control-user" id="weight" placeholder="Weight" name="weight">
+                        <input required type="number" step="0.01" min="0" max="200" class="form-control form-control-user" id="weight" placeholder="Weight" name="weight">
                       </div>
                     </div>
                     <a href="#" class="btn btn-danger btn-user btn-block next-btn">
@@ -454,7 +454,7 @@
                         <input type="text" class="form-control form-control-user" id="spouseOccupation" placeholder="Occupation" name="spouseocc">
                       </div>
                       <div class="col-sm-3 mb-5">
-                        <input type="number" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children" name="children">
+                        <input type="number" min="0" max="99" class="form-control form-control-user" id="numberOfChildren" placeholder="No. of Children" name="children">
                       </div>
                     </div>
                     <div class="text">
@@ -526,10 +526,10 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" class="form-control form-control-user" id="jhsGrade" placeholder="Grade" name="jhgrade">
+                        <input type="number" step="0.01" min="1.0" max="100" class="form-control form-control-user" id="jhsGrade" placeholder="Grade" name="jhgrade">
                       </div>
                       <div class="col-sm-6">
-                        <input type="number" step="0.01" min="1.0" max="100" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed" name="jhyear">
+                        <input type="number" min="1900" max="{% now 'Y' %}" class="form-control form-control-user" id="jhsYearCompleted" placeholder="Year Completed" name="jhyear">
                       </div>
                     </div>
                     <div class="form-group mb-5">
@@ -664,7 +664,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="{% url 'login' %}">Logout</a>
+          <a class="btn btn-danger" href="{% url 'pages:login' %}">Logout</a>
         </div>
       </div>
     </div>

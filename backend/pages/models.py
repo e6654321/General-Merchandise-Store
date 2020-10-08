@@ -22,6 +22,7 @@ class Person(models.Model):
 	brgy = models.CharField(max_length=50,default='',null=False)
 	city = models.CharField(max_length=50,default='',null=False)
 	province = models.CharField(max_length=50,default='',null=False)
+	country = models.CharField(max_length=50,default='',null=False)
 	zip_code = models.IntegerField(default=0)
 	birthdate = models.DateField()
 	status = models.CharField(max_length=1,choices=MARITAL_STATUS,default='S',null=False)
