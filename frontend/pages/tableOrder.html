@@ -11,6 +11,7 @@
 
   <title>GenMerch Dashboard</title>
   {% load static %}
+  {% load custom_tags %}
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="{% static '/assets/shopping-bag.svg' %}" />
 
@@ -201,7 +202,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-danger">Products</h6>
+              <h6 class="m-0 font-weight-bold text-danger">Orders</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -214,84 +215,75 @@
                     <tr>
                       <th></th>
                       <th>Date Registered</th>
-                      <th>Category</th>
-                      <th>Brand</th>
-                      <th>Name</th>
-                      <th>Price</th>
-                      <th>No. of Items</th>
+                      <th>Customer Name</th>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
+                      <th>Total Price</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th></th>
                       <th>Date Registered</th>
-                      <th>Category</th>
-                      <th>Brand</th>
-                      <th>Name</th>
-                      <th>Price</th>
-                      <th>No. of Items</th>
+                      <th>Customer Name</th>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
+                      <th>Total Price</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    {% for product in products %}
+                    {% for order in orders %}
                     <tr>
                       <td >
-                        <a data-toggle="modal" data-target="#deleteModal-{{product.id}} ">
+                        <a data-toggle="modal" data-target="#deleteModal-{{order.id}} ">
                           <i class="fas fa-trash fa-sm fa-fw mx-2"></i>
                         </a>
-                        <a data-toggle="modal" data-target="#updateModal-{{product.id}}">
+                        <a data-toggle="modal" data-target="#updateModal-{{order.id}}">
                           <i class="fas fa-edit fa-sm"></i>
                         </a>
 
                     <!-- Update Modal-->
-                    <div class="modal fade" id="updateModal-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="updateModal-{{product.id}}" aria-hidden="true">
+                    <div class="modal fade" id="updateModal-{{order.id}}" tabindex="-1" role="dialog" aria-labelledby="updateModal-{{order.id}}" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title text-danger" id="updateModalLabel-{{product.id}}">View Product</h5>
+                            <h5 class="modal-title text-danger" id="updateModalLabel-{{order.id}}">View Order</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                           </div>
                           <form class="form" method="POST">
                             {% csrf_token %}
-                            <input type="text" name="product_id" value="{{product.id}}" hidden>
+                            <input type="text" name="order_id" value="{{order.id}}" hidden>
                           <div class="modal-body">
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" name="product_name" placeholder="Name" value="{{product.pname}}" required>
+                                {% load custom_tags %}
+                                <input type="text" class="form-control form-control-user" name="customer_name" placeholder="Customer Name" 
+                                value="{{ order.customer_id|get_customer:'first_name' }}"
+                                disabled>
                               </div>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" name="product_category" placeholder="Category" value="{{product.category}}" required>
+                                <input type="text" class="form-control form-control-user" name="product_name" placeholder="Product Name"
+                                value="{{ order.product_id|get_product:'pname' }}"
+                                disabled>
                               </div>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" name="product_brand" placeholder="Brand" value="{{product.brand}}" required>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <div class="col-sm-4 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" name="product_color" placeholder="Color" value="{{product.color}}" required>
-                              </div>
-                              <div class="col-sm-4">
-                                <input type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" name="product_size" placeholder="Dimension" value="{{product.size}}" required>
-                              </div>
-                              <div class="col-sm-4">
-                                <input type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" name="product_price" placeholder="Price" value="{{product.price}}" required>
+                                <input type="text" class="form-control form-control-user" name="quantity" placeholder="Quantity" value="{{order.quantity}}" disabled>
                               </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-6 mb-4 mb-sm-0 mt-3">
                                 <label class="control-label" for="date">Date Registered</label>
-                                <input class="form-control form-control-user" id="regdate-{{product.id}}" name="date" placeholder="MM/DD/YYY" type="date" value="{{product.date_registered|date:'Y-m-d'}}" disabled   />
+                                <input class="form-control form-control-user" id="regdate-{{order.id}}" name="date" placeholder="MM/DD/YYY" type="date" value="{{order.date_registered|date:'Y-m-d'}}" disabled   />
                               </div>
                               <div class="col-sm-6 mt-5">
-                                <input type="number" step="1" min="0"  max="10000" class="form-control form-control-user" name="product_stock" placeholder="Stock" value="{{product.stock}}" required>
+                                <input type="number" step="0.01" min="0" class="form-control form-control-user" name="product_stock" placeholder="Total Price" value='{{ order.product_id|total_price:order.quantity }}' disabled />
                               </div>
                             </div>
                           </div>
                           <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                            <button class="btn btn-danger" name="btnUpdate" type="submit">Update</button>
                           </div>
                         </form>
                         </div>
@@ -299,20 +291,20 @@
                     </div>
 
                     <!-- Delete Modal-->
-                    <div class="modal fade" id="deleteModal-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal-{{product.id}}" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal-{{order.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal-{{order.id}}" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModal-{{customer.id}}">Delete {{product.pname}}?</h5>
+                            <h5 class="modal-title" id="deleteModal-{{order.id}}">Delete Order #{{order.id}}?</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                           </div>
-                          <div class="modal-body">You can no longer recover {{product.pname}} after deletion.</div>
+                          <div class="modal-body">You can no longer recover Order #{{order.id}} after deletion.</div>
                           <div class="modal-footer">
                             <form class="form" method="POST">
                               {% csrf_token %}
-                              <input type="text" name="product_id" value="{{product.id}}" hidden>
+                              <input type="text" name="order_id" value="{{order.id}}" hidden>
                               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                               <button class="btn btn-danger" name="btnDelete" type="submit">Delete</button>
                             </form>
@@ -322,12 +314,11 @@
                     </div>
 
                       </td>
-                      <td>{{product.date_registered}}</td>
-                      <td>{{product.category}}</td>
-                      <td>{{product.brand}}</td>
-                      <td>{{product.pname}}</td>
-                      <td>{{product.price}}</td>
-                      <td>{{product.stock}}</td>
+                      <td>{{order.date_registered}}</td>
+                      <td>{{ order.customer_id|get_customer:'first_name' }}</td>
+                      <td>{{ order.product_id|get_product:'pname' }}</td>
+                      <td>{{order.quantity}}</td>
+                      <td>{{ order.product_id|total_price:order.quantity }}</td>
                     </tr>
                     {% endfor %}
                   </tbody>
