@@ -29,6 +29,8 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+var totalEarnings = parseFloat(document.getElementById('totalEarnings').textContent.replace(/,/g, ''));
+console.log(totalEarnings);
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -46,7 +48,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(231,  74,  59, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, totalEarnings, 0, 0],
     }],
   },
   options: {
@@ -74,6 +76,7 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
+          beginAtZero: true,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks

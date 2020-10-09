@@ -11,7 +11,7 @@ from django.conf import settings
 class HomePageView(TemplateView):
 	def get(self, request):
 		products = Product.objects.all()
-		return render(request, 'index.html', {'products': products})
+		return render(request, 'index.html', {'isValid': -1, 'products': products})
 
 	def post(self, request):
 		products = Product.objects.all()
@@ -27,8 +27,12 @@ class HomePageView(TemplateView):
 			try:
 				customer = Customer.objects.get(first_name=fname,person_ptr_id=customer_id)
 				product = Product.objects.get(id=product_id)
-				print(customer)
-				print(product)
+				new_stock = product.stock - int(quantity)
+
+				if(new_stock<0):
+					raise Exception
+					
+				update_product = Product.objects.filter(id = product_id).update(stock=new_stock)
 				form = Order(
 							address=address,
 							contact_number=contact_number,
@@ -47,7 +51,18 @@ class HomePageView(TemplateView):
 			return HttpResponse('Not Valid')
 
 class DashboardPageView(TemplateView):
-	template_name = 'dashboard.html'
+	def get(self, request):
+		total = 0
+		all_orders = Order.objects.all()
+		products_count = Product.objects.all().count()
+		customers_count = Customer.objects.all().count()
+
+		for order in all_orders:
+			total += order.quantity * Product.objects.get(id=order.product_id).price
+
+		total = int(total) if total==int(total) else total
+
+		return render(request, 'dashboard.html', {'customers': customers_count, 'products': products_count, 'total': f'{total:,}'})
 
 class LoginPageView(TemplateView):
 	template_name = 'login.html'

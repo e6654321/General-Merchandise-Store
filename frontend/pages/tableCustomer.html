@@ -279,29 +279,29 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
+                                <input type="number" class="form-control form-control-user" name="customer_id" placeholder="ID #" value="{{customer.person_ptr_id}}" disabled>
+                              </div>
+                              <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user" name="customer_street" placeholder="Street" value="{{customer.street}}" required>
                               </div>
                               <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user" name="customer_brgy" placeholder="Barangay" value="{{customer.brgy}}" required>
                               </div>
-                              <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" name="customer_city" placeholder="City" value="{{customer.city}}" required>
-                              </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" name="customer_city" placeholder="City" value="{{customer.city}}" required>
+                              </div>
+                              <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user" name="customer_province" placeholder="Province" value="{{customer.province}}" required>
                               </div>
                               <div class="col-sm-4">
                                 <input type="number" min="1" class="form-control form-control-user" name="customer_zip" placeholder="Zip Code" value="{{customer.zip_code}}" required>
                               </div>
-                              <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" name="customer_country" placeholder="Country" value="{{customer.country}}" required>
-                              </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" name="customer_religion" placeholder="Religion" value="{{customer.religion}}" required>
+                                <input type="text" class="form-control form-control-user" name="customer_country" placeholder="Country" value="{{customer.country}}" required>
                               </div>
                               <div class="col-sm-4">
                                 <select type="text" class="form-control form-control-user" name="customer_gender" placeholder="Gender" selected="{{customer.gender}}" required>
@@ -344,6 +344,9 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-4 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" name="customer_religion" placeholder="Religion" value="{{customer.religion}}" required>
+                              </div>
+                              <div class="col-sm-4">
                                 <input type="number" step="0.01" min="0" max="8" class="form-control form-control-user" name="customer_height" placeholder="Height" value="{{customer.height}}" required>
                               </div>
                               <div class="col-sm-4">
