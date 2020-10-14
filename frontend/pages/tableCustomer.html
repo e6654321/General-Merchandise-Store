@@ -233,6 +233,7 @@
                   </tfoot>
                   <tbody>
                     {% for customer in customers %}
+                    {% if not customer.isDeleted %}
                     <tr>
                       <td >
                         <a data-toggle="modal" data-target="#deleteModal-{{customer.id}}">
@@ -393,6 +394,7 @@
                       <td>{{ customer.birthdate }}</td>
                       <td>{{ customer.city }}</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                   </tbody>
                 </table>

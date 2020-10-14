@@ -234,6 +234,7 @@
                   </tfoot>
                   <tbody>
                     {% for product in products %}
+                    {% if not product.isDeleted %}
                     <tr>
                       <td >
                         <a data-toggle="modal" data-target="#deleteModal-{{product.id}} ">
@@ -329,6 +330,7 @@
                       <td>{{product.date_registered}}</td>
                       <td>{{product.stock}}</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                   </tbody>
                 </table>

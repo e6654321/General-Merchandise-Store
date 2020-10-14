@@ -42,6 +42,7 @@ class HomePageView(TemplateView):
 							quantity=quantity
 							)
 				form.save()
+				console.log(form)
 				return render(request, 'index.html', {'isValid': 1, 'products': products})
 			except Exception as e:
 				print(e)
@@ -257,7 +258,7 @@ class TableCustomerPageView(TemplateView):
 							)
 		elif 'btnDelete' in request.POST:
 			customer_id = request.POST.get("customer_id")
-			delete_customer = Customer.objects.filter(id = customer_id).delete()
+			delete_customer = Customer.objects.filter(id=customer_id).update(isDeleted=True);
 			print('record deleted')
 		# customers = Customer.objects.all()
 		# return render(request, 'tableCustomer.html', {'customers': customers})
@@ -282,7 +283,7 @@ class TableProductPageView(TemplateView):
 			update_product = Product.objects.filter(id = product_id).update(category = category,pname = pname,brand = brand,color = color,size = size,price = price,stock = stock)
 		elif 'btnDelete' in request.POST:
 			product_id = request.POST.get("product_id")
-			delete_product = Product.objects.filter(id = product_id).delete()
+			delete_product = Product.objects.filter(id=product_id).update(isDeleted=True);
 			print('record deleted')
 		# products = Product.objects.all()
 		# return render(request, 'tableProduct.html', {'products': products})
@@ -297,7 +298,7 @@ class TableOrderPageView(TemplateView):
 	def post(self, request):
 		if 'btnDelete' in request.POST:
 			order_id = request.POST.get("order_id")
-			delete_order = Order.objects.filter(id = order_id).delete()
+			delete_order = Order.objects.filter(id=order_id).update(isDeleted=True);
 			print('record deleted')
 		return redirect('pages:tableorder')
 

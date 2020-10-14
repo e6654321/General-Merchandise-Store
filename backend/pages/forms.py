@@ -50,6 +50,8 @@ class CustomerCreate(forms.ModelForm):
 	post_graduate_level = forms.IntegerField(required=False)
 	post_graduate_year_completed = forms.IntegerField(required=False)
 	post_graduate_awards = forms.CharField(required=False)
+	isDeleted = forms.BooleanField(required=False)
+	
 	class Meta:
 		model = Customer
 		fields = '__all__'
@@ -66,6 +68,8 @@ class ProductCreate(forms.ModelForm):
 	image1 = forms.ImageField(required = False)
 	image2 = forms.ImageField(required = False)
 	image3 = forms.ImageField(required = False)
+	isDeleted = forms.BooleanField(required=False)
+
 	class Meta:
 		model = Product
 		fields = '__all__'
@@ -78,6 +82,7 @@ class OrderCreate(forms.ModelForm):
 	customer = forms.IntegerField(required=False)
 	product = forms.IntegerField(required = False)
 	quantity = forms.IntegerField(required = False)
+	isDeleted = forms.BooleanField(required=False)
 
 	class Meta:
 		model = Order
