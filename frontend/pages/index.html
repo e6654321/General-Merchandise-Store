@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li>
-                            <a id="showSuccess" hidden data-toggle="modal" data-target="#successModal" />
+                            <a id="showSuccess" hidden data-toggle="modal" data-target="#successfulModal" />
                         </li>
                         <li>
                             <a id="showFail" hidden data-toggle="modal" data-target="#failModal" />
@@ -149,9 +149,10 @@
         <div class="scroll-to-top d-lg-none position-fixed">
             <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
         </div>
-        <!-- Buy Modal-->
         <div class="portfolio-modal modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModal" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
+              <form class="user" method="POST">                             
+                {% csrf_token %}
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
@@ -169,8 +170,6 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Customer Info-->
-                                  <form id="purchaseForm" class="user" method="POST">                             
-                                    {% csrf_token %}
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h6 class="m-0 font-weight-bold text-danger">Customer Info</h6>
@@ -180,21 +179,21 @@
                                             <div class="p-3">
                                                 <div class="form-group row">
                                                   <div class="col-sm-6">
-                                                  <input required type="text" class="form-control form-control-user" id="customerName" name= "customerName" placeholder="First Name">
+                                                  <input required type="text" class="form-control form-control-user" id="customerName" name= "customerName" placeholder="First Name"/>
                                                   </div>
                                                   <div class="col-sm-6">
-                                                    <input required type="number" step="1" min="0" class="form-control form-control-user" id="customerId" name = "customerId" placeholder="ID #">
+                                                    <input required type="number" step="1" min="0" class="form-control form-control-user" id="customerId" name = "customerId" placeholder="ID #"/>
                                                   </div>
                                                 </div>
                                                 <div class="form-group">
-                                                  <input required type="text" class="form-control form-control-user" id="customerAddress"name = "customerAddress" placeholder="Address">
+                                                  <input required type="text" class="form-control form-control-user" id="customerAddress"name = "customerAddress" placeholder="Address"/>
                                                 </div>
                                                 <div class="form-group row">
                                                   <div class="col-sm-6">
-                                                    <input required type="tel" maxlength="11" pattern="09[0-9]{9}" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number">
+                                                    <input required type="tel" maxlength="11" pattern="09[0-9]{9}" class="form-control form-control-user" id="customerNumber"name = "customerNumber" placeholder="Contact Number"/>
                                                   </div>
                                                   <div class="col-sm-6">
-                                                    <input required type="text" pattern="^[^ ]+@[^ ]+\.[a-z]{2,6}$" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email">
+                                                    <input required type="text" pattern="^[^ ]+@[^ ]+\.[a-z]{2,6}$" class="form-control form-control-user" id="customerEmail" name = "customerEmail" placeholder="Email"/>
                                                   </div>
                                                 </div>
                                             </div>
@@ -208,12 +207,12 @@
                                         </div>
                                         <div class="card-body">
                                         {% for product in products %}
-                                          <input id="productCategory-{{product.id}}" value="{{product.category}}" hidden/>
-                                          <input id="productBrand-{{product.id}}" hidden value="{{product.brand}}"/>
-                                          <input id="productColor-{{product.id}}" hidden value="{{product.color}}"/>
-                                          <input id="productDimension-{{product.id}}" hidden value="{{product.size}}"/>
-                                          <input id="productPrice-{{product.id}}" hidden value="{{product.price}}"/>
-                                          <input id="productStocks-{{product.id}}" hidden value="{{product.stock}}"/>
+                                          <input id="productCategory-{{product.id}}" name="productCategory-{{product.id}}" value="{{product.category}}" hidden/>
+                                          <input id="productBrand-{{product.id}}" name="productBrand-{{product.id}}"hidden value="{{product.brand}}"/>
+                                          <input id="productColor-{{product.id}}" name="productColor-{{product.id}}" hidden value="{{product.color}}"/>
+                                          <input id="productDimension-{{product.id}}" name="productDimension-{{product.id}}" hidden value="{{product.size}}"/>
+                                          <input id="productPrice-{{product.id}}" name="productPrice-{{product.id}}" hidden value="{{product.price}}"/>
+                                          <input id="productStocks-{{product.id}}" name="productStocks-{{product.id}}" hidden value="{{product.stock}}"/>
                                         {% endfor %}
                                           <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -235,7 +234,7 @@
                                                     </select>
                                                   </td>
                                                   <td>
-                                                       <input type="number" min="1" class="form-control form-control-user" pattern="\d*" name="quantity" value="1" required>
+                                                       <input type="number" min="1" class="form-control form-control-user" pattern="\d*" name="quantity" value="1" required/>
                                                   </td>
                                                 </tr>
                                               </tbody>
@@ -245,49 +244,49 @@
                                             <div class="form-group row">
                                               <div class="col-sm-4 mb-3 mb-sm-0">
                                                 <label class="control-label" for="productCategory">Category</label>
-                                                <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category" disabled>
+                                                <input required type="text" class="form-control form-control-user" id="productCategory"name = "productCategory" placeholder="Category" disabled/>
                                               </div>
                                               <div class="col-sm-4">
                                                 <label class="control-label" for="productBrand">Brand</label>
-                                                <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand" disabled>
+                                                <input required type="text" class="form-control form-control-user" id="productBrand" name = "productBrand" placeholder="Brand" disabled/>
                                               </div>
                                               <div class="col-sm-4">
                                                 <label class="control-label" for="productColor">Color</label>
-                                                <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color" disabled>
+                                                <input required type="text" class="form-control form-control-user" id="productColor" name = "productColor" placeholder="Color" disabled/>
                                               </div>
                                             </div>
                                             <div class="form-group row">
                                               <div class="col-sm-4 mb-3 mb-sm-0">
                                                 <label class="control-label" for="productDimension">Dimension</label>
-                                                <input required type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension (ex. 20x30)" disabled>
+                                                <input required type="text" pattern="\d{0,3}x\d{0,3}" class="form-control form-control-user" id="productDimension" name = "productDimension"placeholder="Dimension (ex. 20x30)" disabled/>
                                               </div>
                                               <div class="col-sm-4">
-                                                <label class="control-label" for="productPrice">Price</label>
-                                                <input require type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price" disabled>
+                                                <label class="control-label" for="productPrice">Price</label/>
+                                                <input require type="number" step="0.01" min="0" max="10000" class="form-control form-control-user" id="productPrice" name = "productPrice"placeholder="Price" disabled/>
                                               </div>
                                               <div class="col-sm-4 mb-4">
-                                                <label class="control-label" for="productStocks">Stocks</label>
-                                                <input required type="number" step="1" min="0" max="10000" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks" disabled>
+                                                <label class="control-label" for="productStocks">Stocks</label/>
+                                                <input required type="number" step="1" min="0" max="10000" class="form-control form-control-user" id="productStocks" name = "productStocks"placeholder="No. of Stocks" disabled/>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Purchase</button>
+                                        <button class="btn btn-primary btn-user btn-block" name="submitButton"  type="submit" >Purchase</button>
                                     </div> 
-                                    <button class="btn btn-primary" data-dismiss="modal">
+                                    <button class="btn btn-primary" data-dismiss="modal" name="closeButton">
                                     <i class="fas fa-times fa-fw"></i>
                                         Cancel
                                     </button>
-                                </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
         <!--Successful Purchase Modal-->
-        <div class="modal fade" id = "successModal" role = "dialog" aria-labelledby = "successModalLabel" aria-hidden = "true">
+        <div class="modal fade" id="successfulModal" role = "dialog" aria-labelledby = "successModalLabel" aria-hidden = "true">
             <div class="modal-dialog vertical-align-center" role="document">
                 <div class="modal-content shadow-lg">
                   <div class="modal-header">
@@ -513,7 +512,7 @@
                                                     </div>
                                                     <br />
                                                     <div id="success"></div>
-                                                    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button></div>
+                                                    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton">Send</button></div>
                                                 </form>
                                             </div>
                                         </div>
@@ -560,9 +559,9 @@
                     setTexts();
                 });
 
-                if(isValid===1)
+                if(isValid==1)
                     $("#showSuccess").click();
-                else if(isValid===0)
+                else if(isValid==0)
                     $("#showFail").click();
             });
 

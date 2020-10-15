@@ -42,7 +42,6 @@ class HomePageView(TemplateView):
 							quantity=quantity
 							)
 				form.save()
-				console.log(form)
 				return render(request, 'index.html', {'isValid': 1, 'products': products})
 			except Exception as e:
 				print(e)
