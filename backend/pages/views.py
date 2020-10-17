@@ -85,42 +85,11 @@ class RegCustomerPageView(TemplateView):
 			prov = request.POST.get("province")
 			zipcode = 0 if not request.POST.get("zip").isnumeric() else request.POST.get("zip")
 			country = request.POST.get("country")
-			religion = request.POST.get("religion")
 			gender = request.POST.get("gender")
 			birthdate = '2000-01-01' if request.POST.get("birthdate")=='' else request.POST.get("birthdate")
 			status = request.POST.get("status")
 			height = 1 if request.POST.get("height")=='' else request.POST.get("height")
 			weight = 1 if request.POST.get("weight")=='' else request.POST.get("weight")
-			spousename = request.POST.get("spousefname") + request.POST.get("spousemname") + request.POST.get("spouselname")
-			spouseocc = request.POST.get("spouseocc")
-			children = 0 if not request.POST.get("children").isnumeric() else request.POST.get("children")
-			mothername = request.POST.get("motherfname") + request.POST.get("mothermname") + request.POST.get("motherlname")
-			motherocc = request.POST.get("motherocc")
-			fathername = request.POST.get("fatherfname") + request.POST.get("fathermname") + request.POST.get("fatherlname")
-			fatherocc = request.POST.get("fatherocc")
-			elemschool = request.POST.get("elemschool")
-			elemgrade = 1 if request.POST.get("elemgrade")=='' else request.POST.get("elemgrade")
-			elemyear = 0 if not request.POST.get("elemyear").isnumeric() else request.POST.get("elemyear")
-			elemawards = request.POST.get("elemawards")
-			jhschool = request.POST.get("jhschool")
-			jhgrade = 1 if request.POST.get("jhgrade")=='' else request.POST.get("jhgrade")
-			jhyear = 0 if not request.POST.get("jhyear").isnumeric() else request.POST.get("jhyear")
-			jhawards = request.POST.get("jhawards")
-			shschool = request.POST.get("shschool")
-			shgrade = 1 if request.POST.get("shgrade")=='' else request.POST.get("shgrade")
-			shyear = 0 if not request.POST.get("shyear").isnumeric() else request.POST.get("shyear")
-			shawards = request.POST.get("shawards")
-			shstrand = request.POST.get("shstrand")
-			clgschool = request.POST.get("clgschool")
-			clgcourse = request.POST.get("clgcourse")
-			clglevel = 1 if not request.POST.get("clglevel").isnumeric() else request.POST.get("clglevel")
-			clgyear = 0 if not request.POST.get("clgyear").isnumeric() else request.POST.get("clgyear")
-			clgawards = request.POST.get("clgawards")
-			pgschool = request.POST.get("pgschool")
-			pgcourse = request.POST.get("pgcourse")
-			pglevel = 1 if not request.POST.get("pglevel").isnumeric() else request.POST.get("pglevel")
-			pgyear = 0 if not request.POST.get("pgyear").isnumeric() else request.POST.get("pgyear")
-			pgawards = request.POST.get("pgawards")
 			print(height)
 			form = Customer(picture=picture,
 							first_name=fname,
@@ -135,38 +104,8 @@ class RegCustomerPageView(TemplateView):
 							birthdate=birthdate,
 							status=status,
 							gender=gender,
-							spouse_name=spousename,
-							spouse_occupation=spouseocc,
-							no_of_children=children,
-							mother_name=mothername,
-							mother_occupation=motherocc,
-							father_name=fathername,
-							father_occupation=fatherocc,
 							height=height,
-							weight=weight,
-							religion=religion,
-							elementary_school=elemschool,
-							elementary_grade=elemgrade,
-							elementary_year_completed=elemyear,
-							elementary_awards=elemawards,
-							junioir_high_school=jhschool,
-							junior_high_grade=jhgrade,
-							junior_high_year_completed=jhyear,
-							junior_high_awards=jhawards,
-							senior_high_school=shschool,
-							senior_high_grade=shgrade,
-							senior_high_year_completed=shyear,
-							senior_high_awards=shawards,
-							college_school=clgschool,
-							college_course=clgcourse,
-							college_level=clglevel,
-							college_year_completed=clgyear,
-							college_awards=clgawards,
-							post_graduate_school=pgschool,
-							post_graduate_course=pgcourse,
-							post_graduate_level=pglevel,
-							post_graduate_year_completed=pgyear,
-							post_graduate_awards=pgawards)
+							weight=weight)
 			form.save()
 			# customers = Customer.objects.all()
 			# print(Customer.objects.get(id=1))
@@ -233,7 +172,6 @@ class TableCustomerPageView(TemplateView):
 			customer_province = request.POST.get("customer_province")
 			customer_zip = request.POST.get("customer_zip")
 			customer_country = request.POST.get("customer_country")
-			customer_religion = request.POST.get("customer_religion")
 			customer_gender = request.POST.get("customer_gender")
 			customer_height = request.POST.get("customer_height")
 			customer_status = request.POST.get("customer_status")
@@ -251,7 +189,6 @@ class TableCustomerPageView(TemplateView):
 							status=customer_status,
 							gender=customer_gender,
 							country=customer_country,
-							religion=customer_religion,
 							height=customer_height,
 							weight=customer_weight,
 							)
